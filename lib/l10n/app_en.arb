@@ -1,0 +1,59 @@
+{
+    "@@locale": "en",
+    "app_name": "Dhuwitku",
+    "@app_name": {
+        "placeholders": {}
+    },
+    "personal_finance": "Personal Finance",
+    "@personal_finance": {
+        "placeholders": {}
+    },
+    "onboard_title_1": "Control Your Money, Clearly",
+    "@onboard_title_1": {
+        "placeholders": {}
+    },
+    "onboard_description_1": "Track your income and expenses effortlessly with a clean, distraction-free interface designed for clarity and focus.",
+    "@onboard_description_1": {
+        "placeholders": {}
+    },
+    "onboard_cta_1": "Get Started",
+    "@onboard_cta_1": {
+        "placeholders": {}
+    },
+    "onboard_title_2": "Collaborate Without Confusion",
+    "@onboard_title_2": {
+        "placeholders": {}
+    },
+    "onboard_description_2": "Manage shared finances for events, projects, or teams with transparent collaboration and real-time sync.",
+    "@onboard_description_2": {
+        "placeholders": {}
+    },
+    "onboard_cta_2": "Continue",
+    "@onboard_cta_2": {
+        "placeholders": {}
+    },
+    "onboard_title_3": "Works Even When You’re Offline",
+    "@onboard_title_3": {
+        "placeholders": {}
+    },
+    "onboard_description_3": "Add and review transactions anytime. Your data syncs automatically once you’re back online.",
+    "@onboard_description_3": {
+        "placeholders": {}
+    },
+    "onboard_cta_3": "Sign in with Google",
+    "@onboard_cta_3": {
+        "placeholders": {}
+    },
+    "login_subtitle": "One account. All your financial data.",
+    "@login_subtitle": {
+        "placeholders": {}
+    },
+    "login_cta": "Continue with Google",
+    "@login_cta": {
+        "placeholders": {}
+    },
+    "login_terms": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+    "@login_terms": {
+        "placeholders": {}
+    }
+}

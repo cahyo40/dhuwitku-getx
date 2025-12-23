@@ -1,0 +1,85 @@
+user
+- uid
+- email
+- name
+- photoUrl
+- fcmToken
+
+workspace
+- id (uid if private)
+- name
+- type (private, bebas kalian)
+- uid (creator)
+- description 
+- currency 
+- imageUrl (optional)
+- createdAt
+
+member
+- id
+- workspace_id
+- uid
+- role (admin, member, pending)
+- joinedAt
+- createdAt
+
+transaction
+- id
+- workspace_id
+- uid
+- category_id
+- name
+- description
+- amount
+- createdAt
+- type (expnese, income)
+- tag (optional)
+
+budget
+- id
+- workspace_id
+- uid (creator)
+- name
+- description
+- type (expense, income)
+- amount (uang)
+- category_id
+- startDate
+- endDate
+- createdAt
+
+activity
+- id
+- workspace_id
+- uid
+- createdAt
+- description
+- type
+
+activity-> show
+- create workspace
+- member join
+- member add transaction
+- member edit transaction
+- member delete transaction
+- member add budget
+- member edit budget
+- member delete budget
+- member leave workspace
+- update workspace
+
+category
+- id
+- workspace_id
+- name
+- type
+- icon
+- color
+
+
+botnav
+- home
+- transaction
+- budget
+- activity
+- settings

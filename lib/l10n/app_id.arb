@@ -1,0 +1,59 @@
+{
+    "@@locale": "id",
+    "app_name": "Dhuwitku",
+    "@app_name": {
+        "placeholders": {}
+    },
+    "personal_finance": "Keuangan Pribadi",
+    "@personal_finance": {
+        "placeholders": {}
+    },
+    "onboard_title_1": "Kendalikan Uang Anda, dengan Jelas",
+    "@onboard_title_1": {
+        "placeholders": {}
+    },
+    "onboard_description_1": "Catat pemasukan dan pengeluaran tanpa ribet melalui antarmuka bersih yang dirancang untuk fokus dan ketenangan.",
+    "@onboard_description_1": {
+        "placeholders": {}
+    },
+    "onboard_cta_1": "Mulai",
+    "@onboard_cta_1": {
+        "placeholders": {}
+    },
+    "onboard_title_2": "Berkolaborasi Tanpa Kekacauan",
+    "@onboard_title_2": {
+        "placeholders": {}
+    },
+    "onboard_description_2": "Kelola keuangan bersama untuk acara, proyek, atau tim dengan kolaborasi transparan dan sinkronisasi real-time.",
+    "@onboard_description_2": {
+        "placeholders": {}
+    },
+    "onboard_cta_2": "Lanjut",
+    "@onboard_cta_2": {
+        "placeholders": {}
+    },
+    "onboard_title_3": "Bekerja Meskipun Offline",
+    "@onboard_title_3": {
+        "placeholders": {}
+    },
+    "onboard_description_3": "Tambah dan lihat transaksi kapan saja. Data akan otomatis tersinkron saat kembali online.",
+    "@onboard_description_3": {
+        "placeholders": {}
+    },
+    "onboard_cta_3": "Masuk dengan Google",
+    "@onboard_cta_3": {
+        "placeholders": {}
+    },
+    "login_subtitle": "Satu akun. Seluruh data keuangan Anda.",
+    "@login_subtitle": {
+        "placeholders": {}
+    },
+    "login_cta": "Lanjutkan dengan Google",
+    "@login_cta": {
+        "placeholders": {}
+    },
+    "login_terms": "Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.",
+    "@login_terms": {
+        "placeholders": {}
+    }
+}
