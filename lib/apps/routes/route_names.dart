@@ -12,4 +12,6 @@ abstract class RouteNames {
   static const String ACTIVITY = '/activity';
   static const String SETTINGS = '/settings';
   static const String WORKSPACE = '/workspace';
+  static const String WORKSPACE_DETAIL = '/workspace_detail';
+  static const String WORKSPACE_CREATE = '/workspace_create';
 }
