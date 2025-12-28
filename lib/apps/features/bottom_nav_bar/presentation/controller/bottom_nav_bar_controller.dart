@@ -5,18 +5,21 @@ import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/fetch_works
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
 
+AuthController get auth => Get.find<AuthController>();
+
 class BottomNavBarController extends GetxController {
   // State
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
-
-  AuthController get auth => Get.find<AuthController>();
 
   final FetchWorkspaceUsecase fetchWorkspaceUsecase = FetchWorkspaceUsecase(
     Get.find<BottomNavBarRepositoryImpl>(),
   );
   RxList<WorkspaceModel> workspaces = <WorkspaceModel>[].obs;
   Rx<WorkspaceModel?> workspace = Rxn<WorkspaceModel>();
+
+  final workspaceId = auth.uid.obs;
+  final uid = auth.uid.obs;
 
   final currentPage = 0.obs;
 
@@ -34,13 +37,15 @@ class BottomNavBarController extends GetxController {
     isLoading.value = useLoading;
     try {
       error.value = null;
-      final res = await Future.wait([fetchWorkspaceUsecase(auth.uid)]);
+      final res = await Future.wait([fetchWorkspaceUsecase(uid.value)]);
 
       workspaces.value = res[0];
       if (workspaces.isEmpty) {
         workspace.value = null;
       } else {
-        workspace.value = workspaces.firstWhere((v) => v.id == auth.uid);
+        workspace.value = workspaces.firstWhere(
+          (v) => v.id == workspaceId.value,
+        );
       }
     } catch (e, s) {
       YoLogger.error("$e -> $s");

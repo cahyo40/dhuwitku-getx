@@ -1,5 +1,4 @@
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
-import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,14 +74,6 @@ class HomeWorkspaceScreen extends GetView<HomeController> {
                           backgroundColor: primaryColor.withValues(alpha: .2),
                         ),
                         onTap: () {},
-                      ),
-                      YoListTile(
-                        title: "Manage Workspace",
-                        leading: YoAvatar.icon(icon: Iconsax.setting_3_outline),
-                        onTap: () {
-                          Get.back();
-                          Get.toNamed(RouteNames.WORKSPACE);
-                        },
                       ),
                     ],
                   ),

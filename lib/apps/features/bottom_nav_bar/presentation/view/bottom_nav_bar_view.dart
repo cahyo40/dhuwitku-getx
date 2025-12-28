@@ -1,8 +1,8 @@
-import 'package:dhuwitku/apps/features/activity/presentation/view/activity_view.dart';
 import 'package:dhuwitku/apps/features/budget/presentation/view/budget_view.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/home_view.dart';
 import 'package:dhuwitku/apps/features/report/presentation/view/report_view.dart';
 import 'package:dhuwitku/apps/features/settings/presentation/view/settings_view.dart';
+import 'package:dhuwitku/apps/features/transaction/presentation/view/transaction_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -27,6 +27,11 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
               activeIcon: Iconsax.home_bold,
             ),
             YoNavItem(
+              label: "Transaction",
+              icon: Iconsax.receipt_outline,
+              activeIcon: Iconsax.receipt_bold,
+            ),
+            YoNavItem(
               label: "Budget",
               icon: Iconsax.money_2_outline,
               activeIcon: Iconsax.money_2_bold,
@@ -35,11 +40,6 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
               label: "Report",
               icon: Iconsax.document_outline,
               activeIcon: Iconsax.document_bold,
-            ),
-            YoNavItem(
-              label: "Activity",
-              icon: Iconsax.activity_outline,
-              activeIcon: Iconsax.activity_bold,
             ),
             YoNavItem(
               icon: Iconsax.setting_2_outline,
@@ -77,9 +77,9 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
               index: controller.currentPage.value,
               children: [
                 const HomeView(),
+                const TransactionView(),
                 const BudgetView(),
                 const ReportView(),
-                const ActivityView(),
                 const SettingsView(),
               ],
             );

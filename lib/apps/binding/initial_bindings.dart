@@ -15,7 +15,5 @@ class InitialBindings extends Bindings {
       fenix: true,
     );
     Get.lazyPut(() => BottomNavBarNetworkDatasource(), fenix: true);
-
-    // Get.put(AuthController(), permanent: true);
   }
 }

@@ -5,48 +5,39 @@ user
 - photoUrl
 - fcmToken
 
-workspace
-- id (uid if private)
-- name
-- type (private, bebas kalian)
+budget
+- id
 - uid (creator)
-- description 
-- currency 
-- imageUrl (optional)
+- name
+- description
+- isPrivate
+- type (expense, income)
+- amount (uang)
+- icon
+- category_id
+- startDate
+- endDate
 - createdAt
 
 member
 - id
-- workspace_id
+- budget_id
 - uid
-- role (admin, member, pending)
 - joinedAt
 - createdAt
 
 transaction
 - id
-- workspace_id
 - uid
 - category_id
+- budget_id 
 - name
-- description
 - amount
+- date
+- description
 - createdAt
 - type (expnese, income)
 - tag (optional)
-
-budget
-- id
-- workspace_id
-- uid (creator)
-- name
-- description
-- type (expense, income)
-- amount (uang)
-- category_id
-- startDate
-- endDate
-- createdAt
 
 activity
 - id
@@ -57,22 +48,17 @@ activity
 - type
 
 activity-> show
-- create workspace
-- member join
 - member add transaction
 - member edit transaction
 - member delete transaction
-- member add budget
-- member edit budget
-- member delete budget
-- member leave workspace
-- update workspace
+- member leave budget
+- update budget
 
 category
 - id
-- workspace_id
+- budget_id -> uid == private, budget_id == shared
 - name
-- type
+- type (income,expense)
 - icon
 - color
 
