@@ -14,7 +14,7 @@ abstract class BudgetModel with _$BudgetModel {
     String? description,
     required bool isPrivate,
     required BudgetType type,
-    required String amount,
+    required int amount,
     required String icon,
     String? categoryId,
     int? color,

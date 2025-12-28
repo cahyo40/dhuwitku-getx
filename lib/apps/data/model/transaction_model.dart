@@ -13,7 +13,7 @@ abstract class TransactionModel with _$TransactionModel {
     required String categoryId,
     required String budgetId,
     required String name,
-    required String amount,
+    required int amount,
     required DateTime date,
     String? description,
     required DateTime createdAt,
