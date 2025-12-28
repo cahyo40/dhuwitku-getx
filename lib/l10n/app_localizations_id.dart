@@ -53,4 +53,44 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get login_terms =>
       'Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.';
+
+  @override
+  String get retry => 'Coba Lagi';
+
+  @override
+  String get good_morning => 'Selamat pagi';
+
+  @override
+  String get good_afternoon => 'Selamat siang';
+
+  @override
+  String get good_evening => 'Selamat sore';
+
+  @override
+  String hello(String name) {
+    return 'Halo $name';
+  }
+
+  @override
+  String get total_balance => 'Saldo Total';
+
+  @override
+  String last_month(String data) {
+    return '$data% dari bulan lalu';
+  }
+
+  @override
+  String get income => 'Pemasukan';
+
+  @override
+  String get expense => 'Pengeluaran';
+
+  @override
+  String get this_month => 'Bulan Ini';
+
+  @override
+  String get recent_transaction => 'Transaksi Terbaru';
+
+  @override
+  String get active_budget => 'Anggaran Aktif';
 }

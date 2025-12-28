@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       spacing: YoSpacing.sm,
                       mainAxisAlignment: .start,
                       children: [
-                        YoText.bodyMedium('Total Balance', color: gray700),
+                        YoText.bodyMedium(L10n.t.total_balance, color: gray700),
                         Icon(Iconsax.eye_outline, color: gray700),
                       ],
                     ),
@@ -54,7 +55,7 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                             size: 18,
                           ),
                           YoText.monoSmall(
-                            "+ 12% dari bulan lalu",
+                            "+ ${L10n.t.last_month("12")}",
                             color: gray700,
                           ),
                         ],
@@ -87,7 +88,10 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Icon(Iconsax.arrow_down_2_outline, color: successColor),
-                        YoText.bodyMedium("INCOME", color: gray400),
+                        YoText.bodyMedium(
+                          L10n.t.income.toUpperCase(),
+                          color: gray400,
+                        ),
                       ],
                     ),
                     YoSpace.adaptiveSm(),
@@ -96,7 +100,10 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       fontSize: 18,
                     ),
                     YoSpace.adaptiveSm(),
-                    YoText.bodySmall("+25% this month", color: gray400),
+                    YoText.bodySmall(
+                      "+25% ${L10n.t.this_month}",
+                      color: gray400,
+                    ),
                   ],
                 ),
               ),
@@ -110,7 +117,10 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Icon(Iconsax.arrow_up_1_outline, color: errorColor),
-                        YoText.bodyMedium("EXPENSE", color: gray400),
+                        YoText.bodyMedium(
+                          L10n.t.expense.toUpperCase(),
+                          color: gray400,
+                        ),
                       ],
                     ),
                     YoSpace.adaptiveSm(),
@@ -119,7 +129,10 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       fontSize: 18,
                     ),
                     YoSpace.adaptiveSm(),
-                    YoText.bodySmall("+25% this month", color: gray400),
+                    YoText.bodySmall(
+                      "+25% ${L10n.t.this_month}",
+                      color: gray400,
+                    ),
                   ],
                 ),
               ),

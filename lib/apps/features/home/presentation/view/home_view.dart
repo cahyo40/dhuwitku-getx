@@ -1,4 +1,3 @@
-import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_budget_screen.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_latest_transaction_screen.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_total_balance_screen.dart';
@@ -15,7 +14,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final workspace = Get.find<BottomNavBarController>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(

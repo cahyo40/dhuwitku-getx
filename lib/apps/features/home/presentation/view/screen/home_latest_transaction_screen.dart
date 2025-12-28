@@ -1,9 +1,9 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:dhuwitku/apps/features/home/presentation/controller/home_controller.dart';
 import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
-
-import '../../controller/home_controller.dart';
 
 class HomeLatestTransactionScreen extends GetView<HomeController> {
   const HomeLatestTransactionScreen({super.key});
@@ -16,7 +16,10 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         children: [
-          YoText.titleMedium("Recent Transaction", fontWeight: FontWeight.bold),
+          YoText.titleMedium(
+            L10n.t.recent_transaction,
+            fontWeight: FontWeight.bold,
+          ),
           YoSpace.adaptiveMd(),
           ListView(
             physics: ClampingScrollPhysics(),

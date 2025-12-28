@@ -181,6 +181,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'By continuing, you agree to our Terms of Service and Privacy Policy.'**
   String get login_terms;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @good_morning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get good_morning;
+
+  /// No description provided for @good_afternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon'**
+  String get good_afternoon;
+
+  /// No description provided for @good_evening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening'**
+  String get good_evening;
+
+  /// No description provided for @hello.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello {name}'**
+  String hello(String name);
+
+  /// No description provided for @total_balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Balance'**
+  String get total_balance;
+
+  /// No description provided for @last_month.
+  ///
+  /// In en, this message translates to:
+  /// **'{data}% from last month'**
+  String last_month(String data);
+
+  /// No description provided for @income.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get income;
+
+  /// No description provided for @expense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get expense;
+
+  /// No description provided for @this_month.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get this_month;
+
+  /// No description provided for @recent_transaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Transaction'**
+  String get recent_transaction;
+
+  /// No description provided for @active_budget.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Budget'**
+  String get active_budget;
 }
 
 class _AppLocalizationsDelegate

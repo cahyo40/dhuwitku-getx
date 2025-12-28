@@ -55,5 +55,61 @@
     "login_terms": "By continuing, you agree to our Terms of Service and Privacy Policy.",
     "@login_terms": {
         "placeholders": {}
+    },
+    "retry": "Retry",
+    "@retry": {
+        "placeholders": {}
+    },
+    "good_morning": "Good morning",
+    "@good_morning": {
+        "placeholders": {}
+    },
+    "good_afternoon": "Good afternoon",
+    "@good_afternoon": {
+        "placeholders": {}
+    },
+    "good_evening": "Good evening",
+    "@good_evening": {
+        "placeholders": {}
+    },
+    "hello": "Hello {name}",
+    "@hello": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "total_balance": "Total Balance",
+    "@total_balance": {
+        "placeholders": {}
+    },
+    "last_month": "{data}% from last month",
+    "@last_month": {
+        "placeholders": {
+            "data": {
+                "type": "String"
+            }
+        }
+    },
+    "income": "Income",
+    "@income": {
+        "placeholders": {}
+    },
+    "expense": "Expense",
+    "@expense": {
+        "placeholders": {}
+    },
+    "this_month": "This Month",
+    "@this_month": {
+        "placeholders": {}
+    },
+    "recent_transaction": "Recent Transaction",
+    "@recent_transaction": {
+        "placeholders": {}
+    },
+    "active_budget": "Active Budget",
+    "@active_budget": {
+        "placeholders": {}
     }
 }

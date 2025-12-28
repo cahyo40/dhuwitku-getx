@@ -55,5 +55,61 @@
     "login_terms": "Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.",
     "@login_terms": {
         "placeholders": {}
+    },
+    "retry": "Coba Lagi",
+    "@retry": {
+        "placeholders": {}
+    },
+    "good_morning": "Selamat pagi",
+    "@good_morning": {
+        "placeholders": {}
+    },
+    "good_afternoon": "Selamat siang",
+    "@good_afternoon": {
+        "placeholders": {}
+    },
+    "good_evening": "Selamat sore",
+    "@good_evening": {
+        "placeholders": {}
+    },
+    "hello": "Halo {name}",
+    "@hello": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "total_balance": "Saldo Total",
+    "@total_balance": {
+        "placeholders": {}
+    },
+    "last_month": "{data}% dari bulan lalu",
+    "@last_month": {
+        "placeholders": {
+            "data": {
+                "type": "String"
+            }
+        }
+    },
+    "income": "Pemasukan",
+    "@income": {
+        "placeholders": {}
+    },
+    "expense": "Pengeluaran",
+    "@expense": {
+        "placeholders": {}
+    },
+    "this_month": "Bulan Ini",
+    "@this_month": {
+        "placeholders": {}
+    },
+    "recent_transaction": "Transaksi Terbaru",
+    "@recent_transaction": {
+        "placeholders": {}
+    },
+    "active_budget": "Anggaran Aktif",
+    "@active_budget": {
+        "placeholders": {}
     }
 }

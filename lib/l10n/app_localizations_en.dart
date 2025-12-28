@@ -53,4 +53,44 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get login_terms =>
       'By continuing, you agree to our Terms of Service and Privacy Policy.';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get good_morning => 'Good morning';
+
+  @override
+  String get good_afternoon => 'Good afternoon';
+
+  @override
+  String get good_evening => 'Good evening';
+
+  @override
+  String hello(String name) {
+    return 'Hello $name';
+  }
+
+  @override
+  String get total_balance => 'Total Balance';
+
+  @override
+  String last_month(String data) {
+    return '$data% from last month';
+  }
+
+  @override
+  String get income => 'Income';
+
+  @override
+  String get expense => 'Expense';
+
+  @override
+  String get this_month => 'This Month';
+
+  @override
+  String get recent_transaction => 'Recent Transaction';
+
+  @override
+  String get active_budget => 'Active Budget';
 }

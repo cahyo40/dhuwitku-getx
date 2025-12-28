@@ -1,3 +1,5 @@
+import 'package:dhuwitku/apps/core/utils/greetings.dart';
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -17,9 +19,9 @@ class HomeUserScreen extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: .start,
             children: [
-              YoText.bodySmall('Selamat datang'),
+              YoText.bodySmall(getGreeting()),
               YoText.titleLarge(
-                "Hallo, ${auth.name}",
+                L10n.t.hello(auth.name),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 fontWeight: FontWeight.bold,

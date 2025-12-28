@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/widget/card_budget_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class HomeBudgetScreen extends GetView<HomeController> {
       physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       children: [
-        YoText.titleMedium("Active Budget", fontWeight: FontWeight.bold),
+        YoText.titleMedium(L10n.t.active_budget, fontWeight: FontWeight.bold),
         YoSpace.adaptiveMd(),
         ListView(
           physics: ClampingScrollPhysics(),
