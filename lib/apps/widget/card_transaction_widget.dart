@@ -47,7 +47,7 @@ class CardTransactionWidget extends StatelessWidget {
               crossAxisAlignment: .end,
               children: [
                 YoText.monoMedium(
-                  " ${isIncome ? "+" : "-"} Rp ${transaction.amount}",
+                  " ${isIncome ? "+" : "-"} ${YoCurrencyFormatter.formatCurrency(transaction.amount.toDouble(), symbol: "Rp. ")}",
                   color: isIncome ? successColor : errorColor,
                 ),
                 YoText.bodySmall(
