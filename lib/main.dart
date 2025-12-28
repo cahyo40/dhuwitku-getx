@@ -41,7 +41,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = Get.put(LanguageController(), permanent: true);
-
+    YoDateFormatter.texts = l10n.isIndonesia
+        ? DateTexts.indonesian
+        : DateTexts.english;
     return GetMaterialApp(
       title: 'Dhuwitku',
       localizationsDelegates: const [

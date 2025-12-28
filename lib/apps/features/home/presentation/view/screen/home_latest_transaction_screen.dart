@@ -1,4 +1,5 @@
 import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/features/home/presentation/controller/home_controller.dart';
 import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,14 +22,19 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
             fontWeight: FontWeight.bold,
           ),
           YoSpace.adaptiveMd(),
-          ListView(
+          ListView.builder(
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,
-            children: [
-              CardTransactionWidget(),
-              CardTransactionWidget(),
-              CardTransactionWidget(),
-            ],
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return CardTransactionWidget(
+                transaction: dummyTransactions[index],
+                category: dummyCategories.firstWhere(
+                  (element) =>
+                      element.id == dummyTransactions[index].categoryId,
+                ),
+              );
+            },
           ),
         ],
       ),

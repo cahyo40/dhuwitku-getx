@@ -1,15 +1,24 @@
+import 'package:dhuwitku/apps/core/utils/category_icon_helper.dart';
+import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 class CardTransactionWidget extends StatelessWidget {
   final void Function()? onTap;
-  const CardTransactionWidget({super.key, this.onTap});
+  final TransactionModel transaction;
+  final CategoryModel category;
+  const CardTransactionWidget({
+    super.key,
+    this.onTap,
+    required this.transaction,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isIncome = false;
+    final isIncome = transaction.type == TransactionType.income;
     return Padding(
       padding: YoPadding.bottom8,
       child: YoCard(
@@ -18,9 +27,9 @@ class CardTransactionWidget extends StatelessWidget {
           spacing: YoAdaptive.spacingMd(context),
           children: [
             YoAvatar.icon(
-              icon: FontAwesome.youtube_brand,
-              iconColor: Colors.red,
-              backgroundColor: Colors.red.withOpacity(.25),
+              icon: CategoryIconHelper.getIcon(category.icon),
+              iconColor: Color(category.color),
+              backgroundColor: Color(category.color).withOpacity(.25),
               size: YoAvatarSize.md,
             ),
             Expanded(
@@ -28,8 +37,8 @@ class CardTransactionWidget extends StatelessWidget {
                 spacing: YoSpacing.sm,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  YoText.titleMedium("Youtube Subscription"),
-                  YoText.bodySmall("Langganan", color: gray400),
+                  YoText.titleMedium(transaction.name),
+                  YoText.bodySmall(category.name, color: gray400),
                 ],
               ),
             ),
@@ -38,13 +47,13 @@ class CardTransactionWidget extends StatelessWidget {
               crossAxisAlignment: .end,
               children: [
                 YoText.monoMedium(
-                  " ${isIncome ? "+" : "-"} Rp 100.000",
+                  " ${isIncome ? "+" : "-"} Rp ${transaction.amount}",
                   color: isIncome ? successColor : errorColor,
                 ),
                 YoText.bodySmall(
                   YoDateFormatter.formatDateTime(
-                    DateTime.now(),
-                    format: "dd MMM yy . HH:mm",
+                    transaction.date,
+                    format: _dateFormat(transaction.date),
                   ),
                   color: gray400,
                 ),
@@ -54,5 +63,13 @@ class CardTransactionWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _dateFormat(DateTime date) {
+    if (YoDateFormatter.isToday(date)) {
+      return "HH:mm";
+    } else {
+      return "dd MMM yy . HH:mm";
+    }
   }
 }

@@ -111,5 +111,25 @@
     "active_budget": "Anggaran Aktif",
     "@active_budget": {
         "placeholders": {}
+    },
+    "all": "Semua",
+    "@all": {
+        "placeholders": {}
+    },
+    "transaction_list": "Daftar Transaksi",
+    "@transaction_list": {
+        "placeholders": {}
+    },
+    "error_title": "Kesalahan",
+    "@error_title": {
+        "placeholders": {}
+    },
+    "today": "Hari ini",
+    "@today": {
+        "placeholders": {}
+    },
+    "yesterday": "Kemarin",
+    "@yesterday": {
+        "placeholders": {}
     }
 }

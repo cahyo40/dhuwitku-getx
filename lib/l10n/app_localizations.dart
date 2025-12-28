@@ -253,6 +253,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active Budget'**
   String get active_budget;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @transaction_list.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction List'**
+  String get transaction_list;
+
+  /// No description provided for @error_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error_title;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
 }
 
 class _AppLocalizationsDelegate

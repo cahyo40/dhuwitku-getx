@@ -111,5 +111,25 @@
     "active_budget": "Active Budget",
     "@active_budget": {
         "placeholders": {}
+    },
+    "all": "All",
+    "@all": {
+        "placeholders": {}
+    },
+    "transaction_list": "Transaction List",
+    "@transaction_list": {
+        "placeholders": {}
+    },
+    "error_title": "Error",
+    "@error_title": {
+        "placeholders": {}
+    },
+    "today": "Today",
+    "@today": {
+        "placeholders": {}
+    },
+    "yesterday": "Yesterday",
+    "@yesterday": {
+        "placeholders": {}
     }
 }

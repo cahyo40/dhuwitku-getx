@@ -1,5 +1,9 @@
+import 'package:dhuwitku/apps/features/transaction/presentation/view/screen/transaction_filter_screen.dart';
+import 'package:dhuwitku/apps/features/transaction/presentation/view/screen/transaction_list_screen.dart';
+import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yo_ui/yo_ui_base.dart';
 
 import '../controller/transaction_controller.dart';
 
@@ -8,41 +12,38 @@ class TransactionView extends GetView<TransactionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Transaction'.tr),
-        centerTitle: true,
-      ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
+    return RefreshIndicator(
+      onRefresh: controller.retry,
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(RouteNames.TRANSACTION_CREATE);
+          },
+          child: const Icon(Icons.add),
+        ),
+        body: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        if (controller.error.value != null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          if (controller.error.value != null) {
+            return YoErrorState(
+              title: "Error",
+              description: controller.error.value!,
+              onRetry: controller.retry,
+            );
+          }
+
+          return SafeArea(
+            child: YoColumn(
               children: [
-                Text(controller.error.value!),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: controller.retry,
-                  child: const Text('Retry'),
-                ),
+                TransactionFilterScreen(),
+                Expanded(child: TransactionListScreen()),
               ],
             ),
           );
-        }
-
-        return const SafeArea(
-          child: Center(
-            child: Text(
-              'TransactionView is working',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        );
-      }),
+        }),
+      ),
     );
   }
 }

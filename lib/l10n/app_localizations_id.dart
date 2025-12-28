@@ -93,4 +93,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get active_budget => 'Anggaran Aktif';
+
+  @override
+  String get all => 'Semua';
+
+  @override
+  String get transaction_list => 'Daftar Transaksi';
+
+  @override
+  String get error_title => 'Kesalahan';
+
+  @override
+  String get today => 'Hari ini';
+
+  @override
+  String get yesterday => 'Kemarin';
 }

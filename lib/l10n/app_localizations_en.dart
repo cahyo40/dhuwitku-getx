@@ -93,4 +93,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get active_budget => 'Active Budget';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get transaction_list => 'Transaction List';
+
+  @override
+  String get error_title => 'Error';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
 }
