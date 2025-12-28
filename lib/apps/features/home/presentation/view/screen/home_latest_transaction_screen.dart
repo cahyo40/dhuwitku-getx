@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -12,25 +13,19 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
     return Padding(
       padding: YoPadding.top16,
       child: ListView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: ClampingScrollPhysics(),
         shrinkWrap: true,
-
         children: [
-          Row(
-            mainAxisAlignment: .spaceBetween,
-            children: [
-              YoText.titleMedium(
-                "Recent Transaction",
-                fontWeight: FontWeight.bold,
-              ),
-              YoButton.ghost(text: "See All", onPressed: () {}),
-            ],
-          ),
-          YoSpace.adaptiveSm(),
+          YoText.titleMedium("Recent Transaction", fontWeight: FontWeight.bold),
+          YoSpace.adaptiveMd(),
           ListView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: ClampingScrollPhysics(),
             shrinkWrap: true,
-            children: [],
+            children: [
+              CardTransactionWidget(),
+              CardTransactionWidget(),
+              CardTransactionWidget(),
+            ],
           ),
         ],
       ),

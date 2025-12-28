@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
               HomeUserScreen(),
               Expanded(
                 child: ListView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   padding: YoPadding.all16,
                   children: [

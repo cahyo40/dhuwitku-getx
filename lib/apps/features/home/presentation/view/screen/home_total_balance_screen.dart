@@ -11,36 +11,69 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return YoColumn(
       crossAxisAlignment: .center,
       children: [
-        Row(
-          spacing: YoSpacing.sm,
-          mainAxisAlignment: .center,
-          children: [
-            YoText.bodyMedium('Total Balance', color: gray400),
-            Icon(Iconsax.eye_outline, color: gray400),
-          ],
+        YoCard(
+          backgroundColor: context.primaryColor,
+          child: YoRow(
+            children: [
+              Expanded(
+                child: YoColumn(
+                  spacing: YoAdaptive.spacingMd(context),
+                  crossAxisAlignment: .start,
+                  children: [
+                    Row(
+                      spacing: YoSpacing.sm,
+                      mainAxisAlignment: .start,
+                      children: [
+                        YoText.bodyMedium('Total Balance', color: gray700),
+                        Icon(Iconsax.eye_outline, color: gray700),
+                      ],
+                    ),
+
+                    YoText.monoLarge(
+                      YoCurrencyFormatter.formatCurrency(4000000),
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    Container(
+                      padding: YoPadding.all8,
+                      decoration: BoxDecoration(
+                        borderRadius: YoAdaptive.borderRadiusLg(context),
+                        color: textColor.withOpacity(.25),
+                      ),
+                      child: Row(
+                        mainAxisSize: .min,
+                        spacing: 4,
+                        mainAxisAlignment: .start,
+                        children: [
+                          Icon(
+                            Iconsax.trend_down_outline,
+                            color: gray700,
+                            size: 18,
+                          ),
+                          YoText.monoSmall(
+                            "+ 12% dari bulan lalu",
+                            color: gray700,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              YoAvatar.icon(
+                size: YoAvatarSize.lg,
+                icon: Iconsax.wallet_2_bold,
+                iconColor: textColor,
+                variant: YoAvatarVariant.rounded,
+                backgroundColor: textColor.withOpacity(.25),
+              ),
+            ],
+          ),
         ),
-        YoSpace.adaptiveSm(),
-        YoText.monoLarge(
-          YoCurrencyFormatter.formatCurrency(4000000),
-          fontSize: 36,
-          fontWeight: FontWeight.bold,
-        ),
-        YoSpace.adaptiveSm(),
-        Row(
-          spacing: YoSpacing.sm,
-          mainAxisAlignment: .center,
-          children: [
-            Icon(Iconsax.trend_up_bold, color: successColor),
-            YoText.monoMedium(
-              "+ ${YoCurrencyFormatter.formatCurrency(40000)}",
-              color: successColor,
-            ),
-            YoText.bodyMedium("Today", color: gray400),
-          ],
-        ),
+
         YoSpace.adaptiveLg(),
         Row(
           spacing: YoSpacing.md,
