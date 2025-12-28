@@ -23,6 +23,8 @@ import '../features/transaction/presentation/view/transaction_view.dart';
 import 'route_names.dart';
 import '../features/transaction_create/presentation/binding/transaction_create_binding.dart';
 import '../features/transaction_create/presentation/view/transaction_create_view.dart';
+import '../features/transaction_detail/presentation/binding/transaction_detail_binding.dart';
+import '../features/transaction_detail/presentation/view/transaction_detail_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -87,6 +89,11 @@ class RouteApp {
       name: RouteNames.TRANSACTION_CREATE,
       page: () => const TransactionCreateView(),
       binding: TransactionCreateBinding(),
+    ),
+      GetPage(
+      name: RouteNames.TRANSACTION_DETAIL,
+      page: () => const TransactionDetailView(),
+      binding: TransactionDetailBinding(),
     ),
   ];
 }

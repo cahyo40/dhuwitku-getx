@@ -11,4 +11,5 @@ abstract class RouteNames {
   static const String REPORT = '/report';
   static const String ACTIVITY = '/activity';
   static const String SETTINGS = '/settings';  static const String TRANSACTION_CREATE = '/transaction_create';
+  static const String TRANSACTION_DETAIL = '/transaction_detail';
 }
