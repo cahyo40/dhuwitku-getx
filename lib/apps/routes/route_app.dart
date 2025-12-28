@@ -21,12 +21,6 @@ import '../features/splash_screen/presentation/view/splash_screen_view.dart';
 import '../features/transaction/presentation/binding/transaction_binding.dart';
 import '../features/transaction/presentation/view/transaction_view.dart';
 import 'route_names.dart';
-import '../features/workspace/presentation/binding/workspace_binding.dart';
-import '../features/workspace/presentation/view/workspace_view.dart';
-import '../features/workspace_detail/presentation/binding/workspace_detail_binding.dart';
-import '../features/workspace_detail/presentation/view/workspace_detail_view.dart';
-import '../features/workspace_create/presentation/binding/workspace_create_binding.dart';
-import '../features/workspace_create/presentation/view/workspace_create_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -56,9 +50,9 @@ class RouteApp {
       bindings: [
         BottomNavBarBinding(),
         HomeBinding(),
+        TransactionBinding(),
         BudgetBinding(),
         ReportBinding(),
-        ActivityBinding(),
         SettingsBinding(),
       ],
     ),
@@ -86,21 +80,6 @@ class RouteApp {
       name: RouteNames.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
-    ),
-      GetPage(
-      name: RouteNames.WORKSPACE,
-      page: () => const WorkspaceView(),
-      binding: WorkspaceBinding(),
-    ),
-      GetPage(
-      name: RouteNames.WORKSPACE_DETAIL,
-      page: () => const WorkspaceDetailView(),
-      binding: WorkspaceDetailBinding(),
-    ),
-      GetPage(
-      name: RouteNames.WORKSPACE_CREATE,
-      page: () => const WorkspaceCreateView(),
-      binding: WorkspaceCreateBinding(),
     ),
   ];
 }
