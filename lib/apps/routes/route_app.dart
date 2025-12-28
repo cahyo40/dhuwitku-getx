@@ -21,6 +21,8 @@ import '../features/splash_screen/presentation/view/splash_screen_view.dart';
 import '../features/transaction/presentation/binding/transaction_binding.dart';
 import '../features/transaction/presentation/view/transaction_view.dart';
 import 'route_names.dart';
+import '../features/transaction_create/presentation/binding/transaction_create_binding.dart';
+import '../features/transaction_create/presentation/view/transaction_create_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -80,6 +82,11 @@ class RouteApp {
       name: RouteNames.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+    ),
+      GetPage(
+      name: RouteNames.TRANSACTION_CREATE,
+      page: () => const TransactionCreateView(),
+      binding: TransactionCreateBinding(),
     ),
   ];
 }
