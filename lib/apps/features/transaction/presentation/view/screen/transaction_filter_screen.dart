@@ -54,6 +54,7 @@ class TransactionFilterScreen extends GetView<TransactionController> {
                   .toList(),
             ),
           ),
+          YoSpace.adaptiveSm(),
         ],
       ),
     );
