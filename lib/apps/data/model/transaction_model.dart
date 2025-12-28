@@ -9,15 +9,16 @@ enum TransactionType { expense, income }
 abstract class TransactionModel with _$TransactionModel {
   const factory TransactionModel({
     required String id,
-    required String workspaceId,
     required String uid,
     required String categoryId,
+    required String budgetId,
     required String name,
-    String? description,
-    required TransactionType type,
     required String amount,
+    required DateTime date,
+    String? description,
     required DateTime createdAt,
     required DateTime updatedAt,
+    required TransactionType type,
     List<String>? tag,
   }) = _TransactionModel;
 

@@ -9,12 +9,12 @@ enum CategoryType { expense, income }
 abstract class CategoryModel with _$CategoryModel {
   const factory CategoryModel({
     required String id,
+    required String budgetId,
     required String name,
-    required String workspaceId,
-
     required CategoryType type,
     required String icon,
     required int color,
+    required DateTime createdAt,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>

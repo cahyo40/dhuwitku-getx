@@ -10,9 +10,8 @@ abstract class MemberModel with _$MemberModel {
   const factory MemberModel({
     required String id,
     required String name,
-    required String workspaceId,
+    required String budgetId,
     required String uid,
-    required MemberRole role,
     required DateTime createdAt,
     required DateTime joinedAt,
   }) = _MemberModel;

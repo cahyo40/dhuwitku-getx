@@ -1,6 +1,4 @@
 import 'package:dhuwitku/apps/controller/auth_controller.dart';
-import 'package:dhuwitku/apps/data/model/workspace_model.dart';
-import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
 
@@ -10,7 +8,6 @@ class HomeController extends GetxController {
   // State
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
-  Rx<WorkspaceModel?> workspace = Rxn<WorkspaceModel>();
 
   @override
   void onInit() {
@@ -22,7 +19,6 @@ class HomeController extends GetxController {
     isLoading.value = useLoading;
     try {
       error.value = null;
-      workspace.value = Get.find<BottomNavBarController>().workspace.value;
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       error.value = e.toString();

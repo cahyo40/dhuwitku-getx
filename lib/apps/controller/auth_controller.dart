@@ -1,9 +1,5 @@
 import 'package:dhuwitku/apps/core/const/cache_const.dart';
-import 'package:dhuwitku/apps/core/network/firebase_collection.dart';
 import 'package:dhuwitku/apps/core/services/cache.dart';
-import 'package:dhuwitku/apps/data/model/member_model.dart';
-import 'package:dhuwitku/apps/data/model/users_model.dart';
-import 'package:dhuwitku/apps/data/model/workspace_model.dart';
 import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -59,8 +55,8 @@ class AuthController extends GetxController {
       final user = userCredential.user;
       if (user != null) {
         final fcm = await FirebaseMessaging.instance.getToken();
-        initialApps(user, fcm!);
-        YoCache.saveUser(user, fcm);
+
+        YoCache.saveUser(user, fcm!);
       }
       return userCredential;
     } on PlatformException catch (e) {
@@ -83,52 +79,6 @@ class AuthController extends GetxController {
       YoCache.removeUser();
     } catch (e) {
       rethrow;
-    }
-  }
-
-  Future<void> initialApps(User user, String fcmToken) async {
-    final userModel = UsersModel(
-      email: user.email!,
-      name: user.displayName!,
-      photoUrl: user.photoURL!,
-      uid: user.uid,
-      fcmToken: YoCache.fcmToken,
-    );
-
-    final workSpaceModel = WorkspaceModel(
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      id: user.uid,
-      uid: user.uid,
-      name: user.displayName!,
-      imageUrl: user.photoURL!,
-      type: WorkspaceType.personal,
-    );
-
-    final memberModel = MemberModel(
-      id: user.uid,
-      name: user.displayName!,
-      workspaceId: user.uid,
-      uid: user.uid,
-      role: MemberRole.admin,
-      createdAt: DateTime.now(),
-      joinedAt: DateTime.now(),
-    );
-
-    await userCollection.doc(userModel.uid).set(userModel.toJson());
-
-    final checkWorkspace = await workspaceCollection
-        .doc(workSpaceModel.id)
-        .get();
-    if (!checkWorkspace.exists) {
-      await workspaceCollection
-          .doc(workSpaceModel.id)
-          .set(workSpaceModel.toJson());
-    }
-
-    final checkMember = await memberCollection.doc(memberModel.id).get();
-    if (!checkMember.exists) {
-      await memberCollection.doc(memberModel.id).set(memberModel.toJson());
     }
   }
 

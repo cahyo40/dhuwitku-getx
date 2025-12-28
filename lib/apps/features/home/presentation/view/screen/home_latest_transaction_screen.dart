@@ -1,5 +1,3 @@
-import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
-import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -32,12 +30,7 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
           ListView(
             physics: AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
-            children: [
-              CardTransactionWidget(
-                workspaceModel:
-                    Get.find<BottomNavBarController>().workspace.value!,
-              ),
-            ],
+            children: [],
           ),
         ],
       ),

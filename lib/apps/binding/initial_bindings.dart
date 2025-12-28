@@ -10,10 +10,7 @@ class InitialBindings extends Bindings {
     Get.put(NetworkController(), permanent: true);
     Get.put(SplashScreenController());
 
-    Get.lazyPut(
-      () => BottomNavBarRepositoryImpl(BottomNavBarNetworkDatasource()),
-      fenix: true,
-    );
+    Get.lazyPut(() => BottomNavBarRepositoryImpl(), fenix: true);
     Get.lazyPut(() => BottomNavBarNetworkDatasource(), fenix: true);
   }
 }
