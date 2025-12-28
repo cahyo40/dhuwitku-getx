@@ -1,8 +1,8 @@
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
-import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_chart_screen.dart';
+import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_budget_screen.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_latest_transaction_screen.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_total_balance_screen.dart';
-import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_workspace_screen.dart';
+import 'package:dhuwitku/apps/features/home/presentation/view/screen/home_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -49,7 +49,7 @@ class HomeView extends GetView<HomeController> {
         return SafeArea(
           child: Column(
             children: [
-              HomeWorkspaceScreen(),
+              HomeUserScreen(),
               Expanded(
                 child: ListView(
                   physics: AlwaysScrollableScrollPhysics(),
@@ -57,7 +57,7 @@ class HomeView extends GetView<HomeController> {
                   padding: YoPadding.all16,
                   children: [
                     HomeTotalBalanceScreen(),
-                    HomeChartScreen(),
+                    HomeBudgetScreen(),
                     HomeLatestTransactionScreen(),
                   ],
                 ),
