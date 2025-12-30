@@ -131,5 +131,25 @@
     "yesterday": "Yesterday",
     "@yesterday": {
         "placeholders": {}
+    },
+    "home": "Home",
+    "@home": {
+        "placeholders": {}
+    },
+    "transaction": "Transaction",
+    "@transaction": {
+        "placeholders": {}
+    },
+    "budget": "Budget",
+    "@budget": {
+        "placeholders": {}
+    },
+    "report": "Report",
+    "@report": {
+        "placeholders": {}
+    },
+    "settings": "Settings",
+    "@settings": {
+        "placeholders": {}
     }
 }

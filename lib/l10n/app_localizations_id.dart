@@ -108,4 +108,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get yesterday => 'Kemarin';
+
+  @override
+  String get home => 'Beranda';
+
+  @override
+  String get transaction => 'Transaksi';
+
+  @override
+  String get budget => 'Anggaran';
+
+  @override
+  String get report => 'Laporan';
+
+  @override
+  String get settings => 'Pengaturan';
 }

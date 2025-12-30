@@ -108,4 +108,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yesterday => 'Yesterday';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get transaction => 'Transaction';
+
+  @override
+  String get budget => 'Budget';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get settings => 'Settings';
 }
