@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 import '../controller/category_detail_controller.dart';
 
@@ -15,21 +17,15 @@ class CategoryDetailView extends GetView<CategoryDetailController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: YoLoading());
         }
 
         if (controller.error.value != null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(controller.error.value!),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: controller.retry,
-                  child: const Text('Retry'),
-                ),
-              ],
+           return Center(
+            child: YoErrorState(
+              onRetry: controller.retry,
+              title: L10n.t.error_title,
+              description: controller.error.value!,
             ),
           );
         }
