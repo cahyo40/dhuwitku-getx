@@ -313,6 +313,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
+
+  /// No description provided for @transaction_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Transaction'**
+  String get transaction_create;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @title_no_category.
+  ///
+  /// In en, this message translates to:
+  /// **'No Category Yet'**
+  String get title_no_category;
+
+  /// No description provided for @desc_no_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a category to organize your transactions.'**
+  String get desc_no_category;
+
+  /// No description provided for @add_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get add_category;
+
+  /// No description provided for @save_transaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Transaction'**
+  String get save_transaction;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @hint_input_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter transaction title'**
+  String get hint_input_title;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// No description provided for @hint_input_amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter amount'**
+  String get hint_input_amount;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @hint_select_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a category'**
+  String get hint_select_category;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @hint_select_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a date'**
+  String get hint_select_date;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @hint_input_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter description (optional)'**
+  String get hint_input_description;
+
+  /// No description provided for @hint_select_budget.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a budget (optional)'**
+  String get hint_select_budget;
 }
 
 class _AppLocalizationsDelegate

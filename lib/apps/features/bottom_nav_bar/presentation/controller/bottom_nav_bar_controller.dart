@@ -9,7 +9,6 @@ class BottomNavBarController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
 
-  final workspaceId = auth.uid.obs;
   final uid = auth.uid.obs;
 
   final currentPage = 0.obs;
@@ -24,6 +23,10 @@ class BottomNavBarController extends GetxController {
     _loadData();
   }
 
+  Future<void> retry() async {
+    await _loadData(useLoading: false);
+  }
+
   Future<void> _loadData({bool useLoading = true}) async {
     isLoading.value = useLoading;
     try {
@@ -34,9 +37,5 @@ class BottomNavBarController extends GetxController {
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> retry() async {
-    await _loadData(useLoading: false);
   }
 }

@@ -151,5 +151,73 @@
     "settings": "Pengaturan",
     "@settings": {
         "placeholders": {}
+    },
+    "transaction_create": "Buat Transaksi",
+    "@transaction_create": {
+        "placeholders": {}
+    },
+    "reset": "Atur Ulang",
+    "@reset": {
+        "placeholders": {}
+    },
+    "title_no_category": "Belum Ada Kategori",
+    "@title_no_category": {
+        "placeholders": {}
+    },
+    "desc_no_category": "Tambahkan kategori untuk mengelola transaksi Anda.",
+    "@desc_no_category": {
+        "placeholders": {}
+    },
+    "add_category": "Tambah Kategori",
+    "@add_category": {
+        "placeholders": {}
+    },
+    "save_transaction": "Simpan Transaksi",
+    "@save_transaction": {
+        "placeholders": {}
+    },
+    "title": "Judul",
+    "@title": {
+        "placeholders": {}
+    },
+    "hint_input_title": "Masukkan judul transaksi",
+    "@hint_input_title": {
+        "placeholders": {}
+    },
+    "amount": "Jumlah",
+    "@amount": {
+        "placeholders": {}
+    },
+    "hint_input_amount": "Masukkan jumlah",
+    "@hint_input_amount": {
+        "placeholders": {}
+    },
+    "category": "Kategori",
+    "@category": {
+        "placeholders": {}
+    },
+    "hint_select_category": "Pilih kategori",
+    "@hint_select_category": {
+        "placeholders": {}
+    },
+    "date": "Tanggal",
+    "@date": {
+        "placeholders": {}
+    },
+    "hint_select_date": "Pilih tanggal",
+    "@hint_select_date": {
+        "placeholders": {}
+    },
+    "description": "Deskripsi",
+    "@description": {
+        "placeholders": {}
+    },
+    "hint_input_description": "Masukkan deskripsi (opsional)",
+    "@hint_input_description": {
+        "placeholders": {}
+    },
+    "hint_select_budget": "Pilih anggaran (opsional)",
+    "@hint_select_budget": {
+        "placeholders": {}
     }
 }

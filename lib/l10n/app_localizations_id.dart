@@ -123,4 +123,56 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settings => 'Pengaturan';
+
+  @override
+  String get transaction_create => 'Buat Transaksi';
+
+  @override
+  String get reset => 'Atur Ulang';
+
+  @override
+  String get title_no_category => 'Belum Ada Kategori';
+
+  @override
+  String get desc_no_category =>
+      'Tambahkan kategori untuk mengelola transaksi Anda.';
+
+  @override
+  String get add_category => 'Tambah Kategori';
+
+  @override
+  String get save_transaction => 'Simpan Transaksi';
+
+  @override
+  String get title => 'Judul';
+
+  @override
+  String get hint_input_title => 'Masukkan judul transaksi';
+
+  @override
+  String get amount => 'Jumlah';
+
+  @override
+  String get hint_input_amount => 'Masukkan jumlah';
+
+  @override
+  String get category => 'Kategori';
+
+  @override
+  String get hint_select_category => 'Pilih kategori';
+
+  @override
+  String get date => 'Tanggal';
+
+  @override
+  String get hint_select_date => 'Pilih tanggal';
+
+  @override
+  String get description => 'Deskripsi';
+
+  @override
+  String get hint_input_description => 'Masukkan deskripsi (opsional)';
+
+  @override
+  String get hint_select_budget => 'Pilih anggaran (opsional)';
 }

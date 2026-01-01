@@ -151,5 +151,73 @@
     "settings": "Settings",
     "@settings": {
         "placeholders": {}
+    },
+    "transaction_create": "Create Transaction",
+    "@transaction_create": {
+        "placeholders": {}
+    },
+    "reset": "Reset",
+    "@reset": {
+        "placeholders": {}
+    },
+    "title_no_category": "No Category Yet",
+    "@title_no_category": {
+        "placeholders": {}
+    },
+    "desc_no_category": "Add a category to organize your transactions.",
+    "@desc_no_category": {
+        "placeholders": {}
+    },
+    "add_category": "Add Category",
+    "@add_category": {
+        "placeholders": {}
+    },
+    "save_transaction": "Save Transaction",
+    "@save_transaction": {
+        "placeholders": {}
+    },
+    "title": "Title",
+    "@title": {
+        "placeholders": {}
+    },
+    "hint_input_title": "Enter transaction title",
+    "@hint_input_title": {
+        "placeholders": {}
+    },
+    "amount": "Amount",
+    "@amount": {
+        "placeholders": {}
+    },
+    "hint_input_amount": "Enter amount",
+    "@hint_input_amount": {
+        "placeholders": {}
+    },
+    "category": "Category",
+    "@category": {
+        "placeholders": {}
+    },
+    "hint_select_category": "Select a category",
+    "@hint_select_category": {
+        "placeholders": {}
+    },
+    "date": "Date",
+    "@date": {
+        "placeholders": {}
+    },
+    "hint_select_date": "Select a date",
+    "@hint_select_date": {
+        "placeholders": {}
+    },
+    "description": "Description",
+    "@description": {
+        "placeholders": {}
+    },
+    "hint_input_description": "Enter description (optional)",
+    "@hint_input_description": {
+        "placeholders": {}
+    },
+    "hint_select_budget": "Select a budget (optional)",
+    "@hint_select_budget": {
+        "placeholders": {}
     }
 }
