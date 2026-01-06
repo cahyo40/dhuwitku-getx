@@ -1,3 +1,5 @@
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+
 abstract class TransactionCreateRepository {
-  // TODO: Define contract methods
+  Future<void> createTransaction(TransactionModel transaction);
 }

@@ -219,5 +219,21 @@
     "hint_select_budget": "Select a budget (optional)",
     "@hint_select_budget": {
         "placeholders": {}
+    },
+    "select_icon": "Select Icon",
+    "@select_icon": {
+        "placeholders": {}
+    },
+    "select_color": "Select Color",
+    "@select_color": {
+        "placeholders": {}
+    },
+    "hint_input_category": "Enter category name",
+    "@hint_input_category": {
+        "placeholders": {}
+    },
+    "save_category": "Save Category",
+    "@save_category": {
+        "placeholders": {}
     }
 }

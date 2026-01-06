@@ -415,6 +415,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a budget (optional)'**
   String get hint_select_budget;
+
+  /// No description provided for @select_icon.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Icon'**
+  String get select_icon;
+
+  /// No description provided for @select_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get select_color;
+
+  /// No description provided for @hint_input_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter category name'**
+  String get hint_input_category;
+
+  /// No description provided for @save_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Category'**
+  String get save_category;
 }
 
 class _AppLocalizationsDelegate

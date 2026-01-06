@@ -175,4 +175,16 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get hint_select_budget => 'Pilih anggaran (opsional)';
+
+  @override
+  String get select_icon => 'Pilih Ikon';
+
+  @override
+  String get select_color => 'Pilih Warna';
+
+  @override
+  String get hint_input_category => 'Masukkan nama kategori';
+
+  @override
+  String get save_category => 'Simpan Kategori';
 }

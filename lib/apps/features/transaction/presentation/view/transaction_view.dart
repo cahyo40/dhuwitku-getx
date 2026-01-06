@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/features/transaction/presentation/view/screen/transaction_filter_screen.dart';
 import 'package:dhuwitku/apps/features/transaction/presentation/view/screen/transaction_list_screen.dart';
 import 'package:dhuwitku/apps/routes/route_names.dart';
@@ -16,8 +17,13 @@ class TransactionView extends GetView<TransactionController> {
       onRefresh: controller.retry,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed(RouteNames.TRANSACTION_CREATE);
+          onPressed: () async {
+            final result = await Get.toNamed(RouteNames.TRANSACTION_CREATE);
+            if (result == true) {
+              YoSnackBar.success(Get.context!, "Transaction created");
+              Get.find<BottomNavBarController>().retry();
+              controller.onInit();
+            }
           },
           child: const Icon(Icons.add),
         ),

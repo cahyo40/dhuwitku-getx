@@ -1,5 +1,5 @@
-import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
@@ -16,6 +16,7 @@ class TransactionController extends GetxController {
 
   void changeFilter(int index) {
     currentFilter.value = index;
+
     if (index == 0) {
       filteredTransactions.value = transactions;
     } else {
@@ -31,11 +32,15 @@ class TransactionController extends GetxController {
     _loadData();
   }
 
+  Future<void> retry() async {
+    await _loadData();
+  }
+
   Future<void> _loadData() async {
     try {
       isLoading.value = true;
       error.value = null;
-      transactions.value = dummyTransactions;
+      transactions.value = Get.find<BottomNavBarController>().transactions;
       filteredTransactions.value = transactions;
       await Future.delayed(const Duration(milliseconds: 500));
     } catch (e) {
@@ -43,15 +48,5 @@ class TransactionController extends GetxController {
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> retry() async {
-    await _loadData();
-  }
-
-  @override
-  void onClose() {
-    // TODO: Dispose resources
-    super.onClose();
   }
 }

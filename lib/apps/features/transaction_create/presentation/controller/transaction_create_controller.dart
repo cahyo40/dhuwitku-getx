@@ -1,6 +1,11 @@
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_budgets_usecase.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_categories_usecase.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/features/transaction_create/domain/usecase/transaction_create_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -11,7 +16,15 @@ class TransactionCreateController extends GetxController {
   final RxnString error = RxnString();
   // Data
   final categories = <CategoryModel>[].obs;
+  final categoriesFilter = <CategoryModel>[].obs;
   final budgets = <BudgetModel>[].obs;
+
+  // Usecase
+  final GetCategoriesUsecase getCategoriesUsecase = GetCategoriesUsecase(
+    Get.find(),
+  );
+  final GetBudgetsUsecase getBudgetsUsecase = GetBudgetsUsecase(Get.find());
+  final create = TransactionCreateUsecase(Get.find());
 
   // Form
 
@@ -26,6 +39,11 @@ class TransactionCreateController extends GetxController {
   final description = TextEditingController();
   final budgetId = Rxn<String>();
   final budgetController = TextEditingController();
+
+  CategoryModel get defaultCategory =>
+      transactionType.value == TransactionType.expense
+      ? defaultExpenseCategories.first
+      : defaultIncomeCategories.first;
 
   void onChangeBudgetId(BudgetModel budget) {
     budgetId.value = budget.id;
@@ -44,6 +62,13 @@ class TransactionCreateController extends GetxController {
 
   void onChangeTransactionType(TransactionType type) {
     transactionType.value = type;
+    categoriesFilter.value = categories
+        .where(
+          (e) =>
+              e.type.name.toLowerCase() ==
+              transactionType.value.name.toLowerCase(),
+        )
+        .toList();
     onReset();
   }
 
@@ -72,15 +97,31 @@ class TransactionCreateController extends GetxController {
     budgetController.clear();
   }
 
-  void onSave() {
-    isLoading.value = true;
-    try {
-      if (formKey.currentState!.validate()) {}
-    } catch (e, s) {
-      YoLogger.error("$e -> $s");
-      error.value = e.toString();
-    } finally {
-      isLoading.value = false;
+  void onSave() async {
+    if (formKey.currentState!.validate()) {
+      isLoading.value = true;
+      try {
+        final data = TransactionModel(
+          id: YoIdGenerator.transactionId(length: 16),
+          uid: auth.uid,
+          name: title.text,
+          amount: int.parse(amount.text.replaceAll(",", "")),
+          type: transactionType.value,
+          categoryId: selectedCategory.value?.id ?? defaultCategory.id,
+          date: selectedDate.value,
+          description: description.text,
+          budgetId: budgetId.value ?? "",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        await create.call(data);
+      } catch (e, s) {
+        YoLogger.error("$e -> $s");
+        error.value = e.toString();
+      } finally {
+        isLoading.value = false;
+        Get.back(result: true);
+      }
     }
   }
 
@@ -93,8 +134,21 @@ class TransactionCreateController extends GetxController {
       isLoading.value = useLoading;
       error.value = null;
       dateController.text = YoDateFormatter.formatDate(selectedDate.value);
-      await Future.delayed(const Duration(milliseconds: 500));
-    } catch (e) {
+      final res = await Future.wait([
+        getBudgetsUsecase.call(),
+        getCategoriesUsecase.call(),
+      ]);
+      budgets.value = res[0] as List<BudgetModel>;
+      categories.value = res[1] as List<CategoryModel>;
+      categoriesFilter.value = categories
+          .where(
+            (e) =>
+                e.type.name.toLowerCase() ==
+                transactionType.value.name.toLowerCase(),
+          )
+          .toList();
+    } catch (e, s) {
+      YoLogger.error("$e-> $s");
       error.value = e.toString();
     } finally {
       isLoading.value = false;

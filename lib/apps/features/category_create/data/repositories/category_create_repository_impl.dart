@@ -1,12 +1,15 @@
+import 'package:dhuwitku/apps/data/model/category_model.dart';
+
 import '../../domain/repositories/category_create_repository.dart';
 import '../datasource/category_create_network_datasource.dart';
-import '../datasource/category_create_offline_datasource.dart';
 
 class CategoryCreateRepositoryImpl implements CategoryCreateRepository {
   final CategoryCreateNetworkDatasource _network;
-  final CategoryCreateOfflineDatasource _offline;
 
-  CategoryCreateRepositoryImpl(this._network, this._offline);
+  CategoryCreateRepositoryImpl(this._network);
 
-  // TODO: Implement repository methods
+  @override
+  Future<void> createCategory(CategoryModel category) {
+    return _network.createCategory(category);
+  }
 }

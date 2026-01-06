@@ -1,6 +1,6 @@
 import 'package:dhuwitku/apps/core/utils/date.dart';
-import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,7 @@ class TransactionListScreen extends GetView<TransactionController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      final categories = Get.find<BottomNavBarController>().categories;
       final transactions = controller.filteredTransactions;
       final groupedItems = <dynamic>[];
 
@@ -50,7 +51,7 @@ class TransactionListScreen extends GetView<TransactionController> {
           }
           return CardTransactionWidget(
             transaction: item as TransactionModel,
-            category: dummyCategories.firstWhere(
+            category: categories.firstWhere(
               (element) => element.id == (item).categoryId,
             ),
           );

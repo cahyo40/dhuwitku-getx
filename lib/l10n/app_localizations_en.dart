@@ -175,4 +175,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hint_select_budget => 'Select a budget (optional)';
+
+  @override
+  String get select_icon => 'Select Icon';
+
+  @override
+  String get select_color => 'Select Color';
+
+  @override
+  String get hint_input_category => 'Enter category name';
+
+  @override
+  String get save_category => 'Save Category';
 }

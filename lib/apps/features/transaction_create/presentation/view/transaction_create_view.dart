@@ -59,7 +59,7 @@ class TransactionCreateView extends GetView<TransactionCreateController> {
               actionText: L10n.t.add_category.capitalizeFirst,
               onAction: () async {
                 final result = await Get.toNamed(RouteNames.CATEGORY_CREATE);
-                if (result != null) {
+                if (result == true) {
                   controller.onInit();
                 }
               },

@@ -1,5 +1,9 @@
 import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/features/category_create/presentation/controller/category_create_controller.dart';
+import 'package:dhuwitku/apps/features/category_create/presentation/view/screen/category_form_color_screen.dart';
+import 'package:dhuwitku/apps/features/category_create/presentation/view/screen/category_form_icon_screen.dart';
+import 'package:dhuwitku/apps/features/category_create/presentation/view/screen/category_form_name_screen.dart';
+import 'package:dhuwitku/apps/features/category_create/presentation/view/screen/category_form_type_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -26,11 +30,24 @@ class CategoryCreateView extends GetView<CategoryCreateController> {
           );
         }
 
-        return const SafeArea(
-          child: Center(
-            child: Text(
-              'CategoryCreateView is working',
-              style: TextStyle(fontSize: 20),
+        return SafeArea(
+          child: Form(
+            key: controller.formKey,
+            child: ListView(
+              padding: YoPadding.all16,
+              children: [
+                CategoryFormTypeScreen(),
+                CategoryFormNameScreen(),
+                CategoryFormIconScreen(),
+                CategoryFormColorScreen(),
+                YoButton.primary(
+                  isLoading: controller.isLoading.value,
+                  text: "Save Category",
+                  icon: Icon(Icons.check),
+                  iconPosition: IconPosition.right,
+                  onPressed: controller.onSubmit,
+                ),
+              ],
             ),
           ),
         );

@@ -219,5 +219,21 @@
     "hint_select_budget": "Pilih anggaran (opsional)",
     "@hint_select_budget": {
         "placeholders": {}
+    },
+    "select_icon": "Pilih Ikon",
+    "@select_icon": {
+        "placeholders": {}
+    },
+    "select_color": "Pilih Warna",
+    "@select_color": {
+        "placeholders": {}
+    },
+    "hint_input_category": "Masukkan nama kategori",
+    "@hint_input_category": {
+        "placeholders": {}
+    },
+    "save_category": "Simpan Kategori",
+    "@save_category": {
+        "placeholders": {}
     }
 }

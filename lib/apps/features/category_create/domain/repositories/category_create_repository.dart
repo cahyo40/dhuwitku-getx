@@ -1,3 +1,5 @@
+import 'package:dhuwitku/apps/data/model/category_model.dart';
+
 abstract class CategoryCreateRepository {
-  // TODO: Define contract methods
+  Future<void> createCategory(CategoryModel category);
 }

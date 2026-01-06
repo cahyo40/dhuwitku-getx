@@ -1,12 +1,15 @@
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+
 import '../../domain/repositories/transaction_create_repository.dart';
 import '../datasource/transaction_create_network_datasource.dart';
-import '../datasource/transaction_create_offline_datasource.dart';
 
 class TransactionCreateRepositoryImpl implements TransactionCreateRepository {
   final TransactionCreateNetworkDatasource _network;
-  final TransactionCreateOfflineDatasource _offline;
 
-  TransactionCreateRepositoryImpl(this._network, this._offline);
+  TransactionCreateRepositoryImpl(this._network);
 
-  // TODO: Implement repository methods
+  @override
+  Future<void> createTransaction(TransactionModel transaction) async {
+    return _network.createTransaction(transaction);
+  }
 }

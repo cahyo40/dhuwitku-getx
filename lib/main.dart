@@ -41,6 +41,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = Get.put(LanguageController(), permanent: true);
+
+    // Listen to language changes and update DateTexts reactively
+    ever(l10n.lang, (_) {
+      YoDateFormatter.texts = l10n.isIndonesia
+          ? DateTexts.indonesian
+          : DateTexts.english;
+    });
+
+    // Set initial value
     YoDateFormatter.texts = l10n.isIndonesia
         ? DateTexts.indonesian
         : DateTexts.english;

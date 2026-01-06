@@ -1,14 +1,15 @@
-import 'package:dhuwitku/apps/core/utils/category_icon_helper.dart';
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 class CardTransactionWidget extends StatelessWidget {
   final void Function()? onTap;
   final TransactionModel transaction;
-  final CategoryModel category;
+  final CategoryModel? category;
   const CardTransactionWidget({
     super.key,
     this.onTap,
@@ -19,6 +20,10 @@ class CardTransactionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isIncome = transaction.type == TransactionType.income;
+    CategoryModel defaultCtg = isIncome
+        ? defaultIncomeCategories.first
+        : defaultExpenseCategories.first;
+    final ctg = category ?? defaultCtg;
     return Padding(
       padding: YoPadding.bottom8,
       child: YoCard(
@@ -27,9 +32,13 @@ class CardTransactionWidget extends StatelessWidget {
           spacing: YoAdaptive.spacingMd(context),
           children: [
             YoAvatar.icon(
-              icon: CategoryIconHelper.getIcon(category.icon),
-              iconColor: Color(category.color),
-              backgroundColor: Color(category.color).withOpacity(.25),
+              icon: IconData(
+                ctg.icon.codePoint,
+                fontFamily: ctg.icon.fontFamily,
+                fontPackage: ctg.icon.fontPackage,
+              ),
+              iconColor: Color(ctg.color),
+              backgroundColor: Color(ctg.color).withOpacity(.25),
               size: YoAvatarSize.md,
             ),
             Expanded(
@@ -38,7 +47,7 @@ class CardTransactionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   YoText.titleMedium(transaction.name),
-                  YoText.bodySmall(category.name, color: gray400),
+                  YoText.bodySmall(ctg.name.capitalize!, color: gray400),
                 ],
               ),
             ),
@@ -52,8 +61,8 @@ class CardTransactionWidget extends StatelessWidget {
                 ),
                 YoText.bodySmall(
                   YoDateFormatter.formatDateTime(
-                    transaction.date,
-                    format: _dateFormat(transaction.date),
+                    transaction.createdAt,
+                    format: _dateFormat(transaction.createdAt),
                   ),
                   color: gray400,
                 ),
