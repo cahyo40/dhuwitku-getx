@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 
@@ -11,37 +12,26 @@ class TransactionDetailRepositoryImpl implements TransactionDetailRepository {
 
   @override
   Future<void> deleteTransaction(String id) async {
-    try {
-      await _network.deleteTransaction(id);
-    } catch (e) {
-      throw Exception(e);
-    }
+    await _network.deleteTransaction(id);
+  }
+
+  @override
+  Future<BudgetModel> getBudgetDetail(String id) async {
+    return await _network.getBudgetDetail(id);
   }
 
   @override
   Future<CategoryModel> getCategoryDetail(String id) async {
-    try {
-      return await _network.getCategoryDetail(id);
-    } catch (e) {
-      throw Exception(e);
-    }
+    return await _network.getCategoryDetail(id);
   }
 
   @override
   Future<TransactionModel> getTransactionDetail(String id) async {
-    try {
-      return await _network.getTransactionDetail(id);
-    } catch (e) {
-      throw Exception(e);
-    }
+    return await _network.getTransactionDetail(id);
   }
 
   @override
   Future<void> updateTransaction(TransactionModel transaction) async {
-    try {
-      await _network.updateTransaction(transaction);
-    } catch (e) {
-      throw Exception(e);
-    }
+    await _network.updateTransaction(transaction);
   }
 }

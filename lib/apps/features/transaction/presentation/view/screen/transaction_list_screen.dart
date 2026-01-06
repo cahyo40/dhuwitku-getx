@@ -54,9 +54,10 @@ class TransactionListScreen extends GetView<TransactionController> {
             onTap: () async {
               final result = await Get.toNamed(
                 RouteNames.TRANSACTION_DETAIL,
-                parameters: {
+                arguments: {
                   "id": item.id.toString(),
                   "category_id": item.categoryId.toString(),
+                  "budget_id": item.budgetId.toString(),
                 },
               );
               if (result == true) {
