@@ -27,7 +27,7 @@ class CardTransactionWidget extends StatelessWidget {
     return Padding(
       padding: YoPadding.bottom8,
       child: YoCard(
-        onTap: () {},
+        onTap: onTap,
         child: YoRow(
           spacing: YoAdaptive.spacingMd(context),
           children: [

@@ -2,7 +2,6 @@ import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_amount_screen.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_budget_screen.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_category_screen.dart';
-import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_date_screen.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_description_screen.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_title_screen.dart';
 import 'package:dhuwitku/apps/features/transaction_create/presentation/view/screen/transaction_form_type_screen.dart';
@@ -77,7 +76,7 @@ class TransactionCreateView extends GetView<TransactionCreateController> {
                 TransactionFormTitleScreen(),
                 TransactionFormAmountScreen(),
                 TransactionFormCategoryScreen(),
-                TransactionFormDateScreen(),
+                // TransactionFormDateScreen(),
                 TransactionFormDescriptionScreen(),
                 TransactionFormBudgetScreen(),
                 YoButton.modern(
