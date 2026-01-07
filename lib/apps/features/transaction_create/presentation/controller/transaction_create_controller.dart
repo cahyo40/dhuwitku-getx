@@ -42,8 +42,8 @@ class TransactionCreateController extends GetxController {
 
   CategoryModel get defaultCategory =>
       transactionType.value == TransactionType.expense
-      ? defaultExpenseCategories.first
-      : defaultIncomeCategories.first;
+      ? defaultExpenseCategories
+      : defaultIncomeCategories;
 
   void onChangeBudgetId(BudgetModel budget) {
     budgetId.value = budget.id;

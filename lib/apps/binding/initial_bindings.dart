@@ -1,6 +1,8 @@
 import 'package:dhuwitku/apps/controller/network_controller.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/data/datasource/bottom_nav_bar_network_datasource.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/data/repositories/bottom_nav_bar_repository_impl.dart';
+import 'package:dhuwitku/apps/features/category/data/datasource/category_network_datasource.dart';
+import 'package:dhuwitku/apps/features/category/data/repositories/category_repository_impl.dart';
 import 'package:dhuwitku/apps/features/category_create/data/datasource/category_create_network_datasource.dart';
 import 'package:dhuwitku/apps/features/category_create/data/repositories/category_create_repository_impl.dart';
 import 'package:dhuwitku/apps/features/splash_screen/presentation/controller/splash_screen_controller.dart';
@@ -41,5 +43,11 @@ class InitialBindings extends Bindings {
       fenix: true,
     );
     Get.lazyPut(() => TransactionDetailNetworkDatasource(), fenix: true);
+
+    Get.lazyPut(
+      () => CategoryRepositoryImpl(CategoryNetworkDatasource()),
+      fenix: true,
+    );
+    Get.lazyPut(() => CategoryNetworkDatasource(), fenix: true);
   }
 }

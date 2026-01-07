@@ -80,7 +80,23 @@ class CategoryView extends GetView<CategoryController> {
                         .where((e) => e.categoryId == category.id)
                         .length;
                     return CardCategoryWidget(
-                    
+                      onDelete: () {
+                        YoConfirmDialog.show(
+                          context: context,
+                          title: 'Delete Category',
+                          message:
+                              'Are you sure you want to delete this category?',
+                        ).then((confirm) {
+                          if (confirm == true && context.mounted) {
+                            controller.onDeleteCategory(category.id);
+                            controller.retry();
+                            YoSnackBar.success(
+                              context,
+                              'Category deleted successfully',
+                            );
+                          }
+                        });
+                      },
                       category: category,
                       countTransaction: countTransaction,
                     );

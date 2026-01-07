@@ -1,6 +1,7 @@
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/features/category/domain/usecase/delete_category_usecase.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
@@ -20,6 +21,12 @@ class CategoryController extends GetxController {
 
   final RxInt categoryType = 0.obs;
 
+  final deleteCategory = DeleteCategoryUsecase(Get.find());
+
+  void onDeleteCategory(String id) {
+    deleteCategory.call(id);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -27,6 +34,7 @@ class CategoryController extends GetxController {
   }
 
   Future<void> retry() async {
+    categoryType.value = 0;
     await _loadData();
   }
 

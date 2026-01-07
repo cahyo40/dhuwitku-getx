@@ -8,18 +8,21 @@ class CardCategoryWidget extends StatelessWidget {
   final CategoryModel category;
   final int countTransaction;
   final void Function()? onTap;
+  final void Function()? onDelete;
 
   const CardCategoryWidget({
     super.key,
     required this.category,
     required this.countTransaction,
     this.onTap,
+    this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      onLongPress: onDelete,
       child: YoRow(
         margin: YoPadding.bottom16,
         spacing: YoAdaptive.spacingMd(context),

@@ -1,4 +1,6 @@
 import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:dhuwitku/apps/data/dummy_data.dart';
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/home/presentation/controller/home_controller.dart';
 import 'package:dhuwitku/apps/widget/card_transaction_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +33,16 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
               itemBuilder: (context, index) {
                 return CardTransactionWidget(
                   transaction: controller.transactions[index],
-                  category: controller.categories.firstWhere(
-                    (element) =>
-                        element.id == controller.transactions[index].categoryId,
-                  ),
+                  category:
+                      controller.categories.firstWhereOrNull(
+                        (element) =>
+                            element.id ==
+                            (controller.transactions[index]).categoryId,
+                      ) ??
+                      (controller.transactions[index].type ==
+                              TransactionType.expense
+                          ? defaultExpenseCategories // CategoryModel ✓
+                          : defaultIncomeCategories), // CategoryModel ✓
                 );
               },
             ),

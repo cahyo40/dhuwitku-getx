@@ -1,4 +1,5 @@
 import 'package:dhuwitku/apps/core/utils/date.dart';
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/routes/route_names.dart';
@@ -66,9 +67,13 @@ class TransactionListScreen extends GetView<TransactionController> {
               }
             },
             transaction: item as TransactionModel,
-            category: categories.firstWhere(
-              (element) => element.id == (item).categoryId,
-            ),
+            category:
+                categories.firstWhereOrNull(
+                  (element) => element.id == (item).categoryId,
+                ) ??
+                (item.type == TransactionType.expense
+                    ? defaultExpenseCategories // CategoryModel ✓
+                    : defaultIncomeCategories), // CategoryModel ✓
           );
         },
       );

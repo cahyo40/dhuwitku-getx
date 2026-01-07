@@ -7,6 +7,7 @@ import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/scre
 import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_type_field_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 import '../controller/transaction_detail_controller.dart';
 
@@ -19,7 +20,7 @@ class TransactionDetailView extends GetView<TransactionDetailController> {
       appBar: AppBar(title: Text('TransactionDetail'.tr), centerTitle: true),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: YoLoading());
         }
 
         if (controller.error.value != null) {
@@ -27,7 +28,7 @@ class TransactionDetailView extends GetView<TransactionDetailController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(controller.error.value!),
+                YoText.bodyMedium(controller.error.value!),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: controller.retry,
