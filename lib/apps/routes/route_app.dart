@@ -21,6 +21,16 @@ import '../features/splash_screen/presentation/view/splash_screen_view.dart';
 import '../features/transaction/presentation/binding/transaction_binding.dart';
 import '../features/transaction/presentation/view/transaction_view.dart';
 import 'route_names.dart';
+import '../features/transaction_create/presentation/binding/transaction_create_binding.dart';
+import '../features/transaction_create/presentation/view/transaction_create_view.dart';
+import '../features/transaction_detail/presentation/binding/transaction_detail_binding.dart';
+import '../features/transaction_detail/presentation/view/transaction_detail_view.dart';
+import '../features/category/presentation/binding/category_binding.dart';
+import '../features/category/presentation/view/category_view.dart';
+import '../features/category_detail/presentation/binding/category_detail_binding.dart';
+import '../features/category_detail/presentation/view/category_detail_view.dart';
+import '../features/category_create/presentation/binding/category_create_binding.dart';
+import '../features/category_create/presentation/view/category_create_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -80,6 +90,31 @@ class RouteApp {
       name: RouteNames.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+    ),
+      GetPage(
+      name: RouteNames.TRANSACTION_CREATE,
+      page: () => const TransactionCreateView(),
+      binding: TransactionCreateBinding(),
+    ),
+      GetPage(
+      name: RouteNames.TRANSACTION_DETAIL,
+      page: () => const TransactionDetailView(),
+      binding: TransactionDetailBinding(),
+    ),
+      GetPage(
+      name: RouteNames.CATEGORY,
+      page: () => const CategoryView(),
+      binding: CategoryBinding(),
+    ),
+      GetPage(
+      name: RouteNames.CATEGORY_DETAIL,
+      page: () => const CategoryDetailView(),
+      binding: CategoryDetailBinding(),
+    ),
+      GetPage(
+      name: RouteNames.CATEGORY_CREATE,
+      page: () => const CategoryCreateView(),
+      binding: CategoryCreateBinding(),
     ),
   ];
 }

@@ -93,4 +93,98 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get active_budget => 'Active Budget';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get transaction_list => 'Transaction List';
+
+  @override
+  String get error_title => 'Error';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get transaction => 'Transaction';
+
+  @override
+  String get budget => 'Budget';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get transaction_create => 'Create Transaction';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get title_no_category => 'No Category Yet';
+
+  @override
+  String get desc_no_category =>
+      'Add a category to organize your transactions.';
+
+  @override
+  String get add_category => 'Add Category';
+
+  @override
+  String get save_transaction => 'Save Transaction';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get hint_input_title => 'Enter transaction title';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get hint_input_amount => 'Enter amount';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get hint_select_category => 'Select a category';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get hint_select_date => 'Select a date';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get hint_input_description => 'Enter description (optional)';
+
+  @override
+  String get hint_select_budget => 'Select a budget (optional)';
+
+  @override
+  String get select_icon => 'Select Icon';
+
+  @override
+  String get select_color => 'Select Color';
+
+  @override
+  String get hint_input_category => 'Enter category name';
+
+  @override
+  String get save_category => 'Save Category';
 }

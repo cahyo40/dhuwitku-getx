@@ -1,26 +1,44 @@
+import 'package:dhuwitku/apps/data/dummy_data.dart';
+import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 class CardTransactionWidget extends StatelessWidget {
   final void Function()? onTap;
-  const CardTransactionWidget({super.key, this.onTap});
+  final TransactionModel transaction;
+  final CategoryModel? category;
+  const CardTransactionWidget({
+    super.key,
+    this.onTap,
+    required this.transaction,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isIncome = false;
+    final isIncome = transaction.type == TransactionType.income;
+    CategoryModel defaultCtg = isIncome
+        ? defaultIncomeCategories.first
+        : defaultExpenseCategories.first;
+    final ctg = category ?? defaultCtg;
     return Padding(
       padding: YoPadding.bottom8,
       child: YoCard(
-        onTap: () {},
+        onTap: onTap,
         child: YoRow(
           spacing: YoAdaptive.spacingMd(context),
           children: [
             YoAvatar.icon(
-              icon: FontAwesome.youtube_brand,
-              iconColor: Colors.red,
-              backgroundColor: Colors.red.withOpacity(.25),
+              icon: IconData(
+                ctg.icon.codePoint,
+                fontFamily: ctg.icon.fontFamily,
+                fontPackage: ctg.icon.fontPackage,
+              ),
+              iconColor: Color(ctg.color),
+              backgroundColor: Color(ctg.color).withOpacity(.25),
               size: YoAvatarSize.md,
             ),
             Expanded(
@@ -28,8 +46,8 @@ class CardTransactionWidget extends StatelessWidget {
                 spacing: YoSpacing.sm,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  YoText.titleMedium("Youtube Subscription"),
-                  YoText.bodySmall("Langganan", color: gray400),
+                  YoText.titleMedium(transaction.name),
+                  YoText.bodySmall(ctg.name.capitalize!, color: gray400),
                 ],
               ),
             ),
@@ -38,13 +56,13 @@ class CardTransactionWidget extends StatelessWidget {
               crossAxisAlignment: .end,
               children: [
                 YoText.monoMedium(
-                  " ${isIncome ? "+" : "-"} Rp 100.000",
+                  " ${isIncome ? "+" : "-"} ${YoCurrencyFormatter.formatCurrency(transaction.amount.toDouble(), symbol: "Rp. ")}",
                   color: isIncome ? successColor : errorColor,
                 ),
                 YoText.bodySmall(
                   YoDateFormatter.formatDateTime(
-                    DateTime.now(),
-                    format: "dd MMM yy . HH:mm",
+                    transaction.createdAt,
+                    format: _dateFormat(transaction.createdAt),
                   ),
                   color: gray400,
                 ),
@@ -54,5 +72,13 @@ class CardTransactionWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _dateFormat(DateTime date) {
+    if (YoDateFormatter.isToday(date)) {
+      return "HH:mm";
+    } else {
+      return "dd MMM yy . HH:mm";
+    }
   }
 }

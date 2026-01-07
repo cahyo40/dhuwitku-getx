@@ -1,13 +1,18 @@
-import 'package:dhuwitku/apps/controller/auth_controller.dart';
+import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
-
-AuthController get auth => Get.find<AuthController>();
 
 class HomeController extends GetxController {
   // State
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
+
+  final RxList<TransactionModel> transactions = <TransactionModel>[].obs;
+  final RxList<BudgetModel> budgets = <BudgetModel>[].obs;
+  final RxList<CategoryModel> categories = <CategoryModel>[].obs;
 
   @override
   void onInit() {
@@ -15,19 +20,23 @@ class HomeController extends GetxController {
     _loadData();
   }
 
+  Future<void> retry() async {
+    await _loadData(useLoading: false);
+  }
+
   Future<void> _loadData({bool useLoading = true}) async {
     isLoading.value = useLoading;
     try {
       error.value = null;
+      budgets.value = Get.find<BottomNavBarController>().budgets;
+      transactions.value = Get.find<BottomNavBarController>().transactions;
+      categories.value = Get.find<BottomNavBarController>().categories;
+      transactions.sort((a, b) => b.date.compareTo(a.date));
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       error.value = e.toString();
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> retry() async {
-    await _loadData(useLoading: false);
   }
 }

@@ -17,13 +17,37 @@ class AuthController extends GetxController {
   static bool isInitialize = false;
   final Rxn<User> user = Rxn<User>();
 
-  static Future<void> initSignIn() async {
-    await _googleSignIn.initialize(
-      // diganti
-      serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'] ?? '',
-    );
+  Stream<User?> get authChange {
+    return _auth.authStateChanges();
+  }
 
-    isInitialize = true;
+  String get email => YoCache.box.read(CacheConst.email);
+
+  String get fcmToken => YoCache.box.read(CacheConst.fcmToken);
+
+  bool get isLoggedIn => user.value != null;
+
+  String get name => YoCache.box.read(CacheConst.name);
+
+  String get photoUrl => YoCache.box.read(CacheConst.photoUrl);
+  String get uid => YoCache.box.read(CacheConst.uid);
+  @override
+  void onInit() {
+    final isOnboardingDone = YoCache.onboard;
+
+    ever(user, (_) => _handleRouting());
+
+    authChange.listen((u) => user.value = u);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (isOnboardingDone == true) {
+        Get.offAllNamed(RouteNames.ONBOARDING);
+      } else {
+        _handleRouting();
+      }
+    });
+
+    super.onInit();
   }
 
   Future<UserCredential?> signInWithGoogle() async {
@@ -60,12 +84,10 @@ class AuthController extends GetxController {
       }
       return userCredential;
     } on PlatformException catch (e) {
-      // android
       YoLogger.error(e.code);
       if (e.code == 'sign_in_canceled') return null;
       rethrow;
     } on GoogleSignInException catch (e, s) {
-      // google_sign_in >= 6.2
       YoLogger.error("$e -> $s");
       if (e.code == GoogleSignInExceptionCode.canceled) return null;
       rethrow;
@@ -82,43 +104,19 @@ class AuthController extends GetxController {
     }
   }
 
-  Stream<User?> get authChange {
-    return _auth.authStateChanges();
-  }
-
-  bool get isLoggedIn => user.value != null;
-
-  String get uid => YoCache.box.read(CacheConst.uid);
-  String get name => YoCache.box.read(CacheConst.name);
-  String get email => YoCache.box.read(CacheConst.email);
-  String get photoUrl => YoCache.box.read(CacheConst.photoUrl);
-  String get fcmToken => YoCache.box.read(CacheConst.fcmToken);
-
-  @override
-  void onInit() {
-    final isOnboardingDone = YoCache.onboard;
-
-    ever(user, (_) => _handleRouting());
-
-    authChange.listen((u) => user.value = u);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isOnboardingDone == true) {
-        Get.offAllNamed(RouteNames.ONBOARDING);
-      } else {
-        _handleRouting();
-      }
-    });
-
-    super.onInit();
-  }
-
   void _handleRouting() {
     if (user.value != null) {
-      // Ganti dengan Bottom Nav Bar
       Get.offAllNamed(RouteNames.BOTTOM_NAV_BAR);
     } else {
       Get.offAllNamed(RouteNames.LOGIN);
     }
+  }
+
+  static Future<void> initSignIn() async {
+    await _googleSignIn.initialize(
+      serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'] ?? '',
+    );
+
+    isInitialize = true;
   }
 }

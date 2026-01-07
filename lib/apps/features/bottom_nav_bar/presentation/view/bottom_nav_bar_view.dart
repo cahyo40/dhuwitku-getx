@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/features/budget/presentation/view/budget_view.dart';
 import 'package:dhuwitku/apps/features/home/presentation/view/home_view.dart';
 import 'package:dhuwitku/apps/features/report/presentation/view/report_view.dart';
@@ -23,27 +24,27 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
           items: [
             YoNavItem(
               icon: Iconsax.home_outline,
-              label: 'Home',
+              label: L10n.t.home,
               activeIcon: Iconsax.home_bold,
             ),
             YoNavItem(
-              label: "Transaction",
+              label: L10n.t.transaction,
               icon: Iconsax.receipt_outline,
               activeIcon: Iconsax.receipt_bold,
             ),
             YoNavItem(
-              label: "Budget",
+              label: L10n.t.budget,
               icon: Iconsax.money_2_outline,
               activeIcon: Iconsax.money_2_bold,
             ),
             YoNavItem(
-              label: "Report",
+              label: L10n.t.report,
               icon: Iconsax.document_outline,
               activeIcon: Iconsax.document_bold,
             ),
             YoNavItem(
               icon: Iconsax.setting_2_outline,
-              label: 'Settings',
+              label: L10n.t.settings,
               activeIcon: Iconsax.setting_2_bold,
             ),
           ],
@@ -56,18 +57,10 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
         }
 
         if (controller.error.value != null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(controller.error.value!),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: controller.retry,
-                  child: const Text('Retry'),
-                ),
-              ],
-            ),
+          return YoErrorState(
+            title: L10n.t.error_title,
+            description: controller.error.value!,
+            onRetry: controller.retry,
           );
         }
 

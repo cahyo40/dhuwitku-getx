@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -142,10 +143,19 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 YoButton.custom(
                   expanded: true,
-
                   text: "Sign out",
                   textColor: errorColor,
-                  onPressed: () {},
+                  onPressed: () async {
+                    YoConfirmDialog.show(
+                      context: context,
+                      title: "Sign out",
+                      message: "Are you sure you want to sign out?",
+                    ).then((confimation) async {
+                      if (confimation == true) {
+                        await auth.signOut();
+                      }
+                    });
+                  },
                   icon: Icon(Iconsax.logout_1_outline, color: errorColor),
                   backgroundColor: errorColor.withValues(alpha: .2),
                 ),

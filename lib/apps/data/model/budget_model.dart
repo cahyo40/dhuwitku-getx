@@ -1,9 +1,8 @@
+import 'package:dhuwitku/apps/data/model/icon_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'budget_model.freezed.dart';
 part 'budget_model.g.dart';
-
-enum BudgetType { expense, income }
 
 @freezed
 abstract class BudgetModel with _$BudgetModel {
@@ -15,7 +14,7 @@ abstract class BudgetModel with _$BudgetModel {
     required bool isPrivate,
     required BudgetType type,
     required int amount,
-    required String icon,
+    required IconModel icon,
     String? categoryId,
     int? color,
     required DateTime startDate,
@@ -27,3 +26,5 @@ abstract class BudgetModel with _$BudgetModel {
   factory BudgetModel.fromJson(Map<String, dynamic> json) =>
       _$BudgetModelFromJson(json);
 }
+
+enum BudgetType { expense, income }

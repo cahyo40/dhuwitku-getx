@@ -1,5 +1,6 @@
 import 'package:dhuwitku/apps/core/utils/greetings.dart';
 import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
