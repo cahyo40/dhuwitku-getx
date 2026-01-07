@@ -53,7 +53,9 @@ class TransactionEditActionButtonScreen
                 Expanded(
                   child: YoButton.primary(
                     text: "Perbarui Data",
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.onUpdate();
+                    },
                   ),
                 ),
                 YoButtonIcon.custom(

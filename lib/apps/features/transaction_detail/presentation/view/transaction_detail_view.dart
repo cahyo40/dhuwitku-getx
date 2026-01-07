@@ -39,16 +39,19 @@ class TransactionDetailView extends GetView<TransactionDetailController> {
         }
 
         return SafeArea(
-          child: ListView(
-            children: [
-              TransactionEditTypeFieldScreen(),
-              TransactionEditAmountFieldScreen(),
-              TransactionEditTitleFieldScreen(),
-              TransactionEditCategoryFieldScreen(),
-              TransactionEditDescriptionFieldScreen(),
-              TransactionEditBudgetFieldScreen(),
-              TransactionEditActionButtonScreen(),
-            ],
+          child: Form(
+            key: controller.formKey,
+            child: ListView(
+              children: [
+                TransactionEditTypeFieldScreen(),
+                TransactionEditAmountFieldScreen(),
+                TransactionEditTitleFieldScreen(),
+                TransactionEditCategoryFieldScreen(),
+                TransactionEditDescriptionFieldScreen(),
+                TransactionEditBudgetFieldScreen(),
+                TransactionEditActionButtonScreen(),
+              ],
+            ),
           ),
         );
       }),

@@ -21,21 +21,23 @@ class HomeLatestTransactionScreen extends GetView<HomeController> {
             fontWeight: FontWeight.bold,
           ),
           YoSpace.adaptiveMd(),
-          ListView.builder(
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.transactions.length > 5
-                ? 5
-                : controller.transactions.length,
-            itemBuilder: (context, index) {
-              return CardTransactionWidget(
-                transaction: controller.transactions[index],
-                category: controller.categories.firstWhere(
-                  (element) =>
-                      element.id == controller.transactions[index].categoryId,
-                ),
-              );
-            },
+          Obx(
+            () => ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.transactions.length > 5
+                  ? 5
+                  : controller.transactions.length,
+              itemBuilder: (context, index) {
+                return CardTransactionWidget(
+                  transaction: controller.transactions[index],
+                  category: controller.categories.firstWhere(
+                    (element) =>
+                        element.id == controller.transactions[index].categoryId,
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

@@ -60,9 +60,30 @@ class TransactionDetailController extends GetxController {
     _loadData();
   }
 
-  void onUpdate() {
+void onUpdate() {
     if (formKey.currentState!.validate()) {
-      updateTransaction.call(transaction.value!);
+      isLoading.value = true;
+      try {
+        final data = TransactionModel(
+          id: id.value,
+          name: noteController.text,
+          amount: int.parse(amountController.text),
+          type: transactionType.value,
+          categoryId: category.value!.id,
+          budgetId: budgetId.value,
+          description: descriptionController.text,
+          uid: transaction.value!.uid,
+          date: transaction.value!.date,
+          createdAt: transaction.value!.createdAt,
+          updatedAt: DateTime.now(),
+        );
+        updateTransaction.call(data);
+        Get.back(result: true);
+      } catch (e) {
+        YoSnackBar.error(Get.context!, e.toString());
+      } finally {
+        isLoading.value = false;
+      }
     }
   }
 
