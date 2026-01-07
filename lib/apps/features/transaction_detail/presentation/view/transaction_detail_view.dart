@@ -1,3 +1,10 @@
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_action_button_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_amount_field_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_budget_field_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_category_field_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_description_field_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_title_field_screen.dart';
+import 'package:dhuwitku/apps/features/transaction_detail/presentation/view/screen/transaction_edit_type_field_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,10 +16,7 @@ class TransactionDetailView extends GetView<TransactionDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TransactionDetail'.tr),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('TransactionDetail'.tr), centerTitle: true),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -34,12 +38,17 @@ class TransactionDetailView extends GetView<TransactionDetailController> {
           );
         }
 
-        return const SafeArea(
-          child: Center(
-            child: Text(
-              'TransactionDetailView is working',
-              style: TextStyle(fontSize: 20),
-            ),
+        return SafeArea(
+          child: ListView(
+            children: [
+              TransactionEditTypeFieldScreen(),
+              TransactionEditAmountFieldScreen(),
+              TransactionEditTitleFieldScreen(),
+              TransactionEditCategoryFieldScreen(),
+              TransactionEditDescriptionFieldScreen(),
+              TransactionEditBudgetFieldScreen(),
+              TransactionEditActionButtonScreen(),
+            ],
           ),
         );
       }),

@@ -56,36 +56,34 @@ class TransactionFormCategoryScreen
                           }
                         },
                       )
-                    : Obx(
-                        () => ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: controller.categoriesFilter.length,
-                          itemBuilder: (context, index) {
-                            final category = controller.categoriesFilter[index];
-                            final icon = category.icon;
-                            return YoListTile(
-                              selected:
-                                  controller.selectedCategory.value?.id ==
-                                  category.id,
-                              title: category.name.capitalize,
-                              leading: Icon(
-                                IconData(
-                                  icon.codePoint,
-                                  fontFamily: icon.fontFamily,
-                                  fontPackage: icon.fontPackage,
-                                ),
-                                color: Color(category.color),
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.categoriesFilter.length,
+                        itemBuilder: (context, index) {
+                          final category = controller.categoriesFilter[index];
+                          final icon = category.icon;
+                          return YoListTile(
+                            selected:
+                                controller.selectedCategory.value!.id ==
+                                category.id,
+                            title: category.name.capitalize,
+                            leading: Icon(
+                              IconData(
+                                icon.codePoint,
+                                fontFamily: icon.fontFamily,
+                                fontPackage: icon.fontPackage,
                               ),
+                              color: Color(category.color),
+                            ),
 
-                              onTap: () {
-                                controller.categoryController.text =
-                                    category.name.capitalize!;
-                                controller.selectedCategory.value = category;
-                                Get.back();
-                              },
-                            );
-                          },
-                        ),
+                            onTap: () {
+                              controller.categoryController.text =
+                                  category.name.capitalize!;
+                              controller.selectedCategory.value = category;
+                              Get.back();
+                            },
+                          );
+                        },
                       ),
               ),
             );

@@ -1,11 +1,13 @@
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_categories_usecase.dart';
 import 'package:dhuwitku/apps/features/transaction_detail/domain/usecase/delete_transaction_usecase.dart';
 import 'package:dhuwitku/apps/features/transaction_detail/domain/usecase/get_category_usecase.dart';
 import 'package:dhuwitku/apps/features/transaction_detail/domain/usecase/get_transaction_usecase.dart';
 import 'package:dhuwitku/apps/features/transaction_detail/domain/usecase/update_transaction_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 class TransactionDetailController extends GetxController {
   // State
@@ -17,11 +19,16 @@ class TransactionDetailController extends GetxController {
   final RxString id = RxString('');
   final RxString categoryId = RxString('');
   final RxString budgetId = RxString('');
+  final categories = <CategoryModel>[].obs;
+  final categoriesFilter = <CategoryModel>[].obs;
 
   final getTransaction = GetTransactionUsecase(Get.find());
   final getCategory = GetCategoryUsecase(Get.find());
   final deleteTransaction = DeleteTransactionUsecase(Get.find());
   final updateTransaction = UpdateTransactionUsecase(Get.find());
+  final GetCategoriesUsecase getCategoriesUsecase = GetCategoriesUsecase(
+    Get.find(),
+  );
 
   final Rxn<TransactionModel> transaction = Rxn<TransactionModel>();
   final Rxn<CategoryModel> category = Rxn<CategoryModel>();
@@ -30,7 +37,9 @@ class TransactionDetailController extends GetxController {
   final amountController = TextEditingController();
   final noteController = TextEditingController();
   final descriptionController = TextEditingController();
+  final categoryController = TextEditingController();
   final budgetController = TextEditingController();
+  final Rx<TransactionType> transactionType = TransactionType.expense.obs;
 
   @override
   void onClose() {
@@ -61,8 +70,16 @@ class TransactionDetailController extends GetxController {
     await _loadData();
   }
 
-  void toggleEdit() => isEdit.value = !isEdit.value;
-
+  void toggleEdit() {
+    isEdit.value = !isEdit.value;
+    if (isEdit.isTrue) {
+      amountController.text = transaction.value?.amount.toString() ?? "0";
+    } else {
+      amountController.text = YoCurrencyFormatter.formatCurrency(
+        transaction.value?.amount.toDouble() ?? 0.0,
+      );
+    }
+  }
 
   Future<void> _loadData() async {
     try {
@@ -71,14 +88,28 @@ class TransactionDetailController extends GetxController {
       final res = await Future.wait([
         getTransaction.call(id.value),
         getCategory.call(categoryId.value),
+        getCategoriesUsecase.call(),
       ]);
       transaction.value = res[0] as TransactionModel;
       category.value = res[1] as CategoryModel;
+      categories.value = res[2] as List<CategoryModel>;
+      categoriesFilter.value = categories
+          .where(
+            (e) =>
+                e.type.name.toLowerCase() ==
+                transactionType.value.name.toLowerCase(),
+          )
+          .toList();
 
-      amountController.text = transaction.value?.amount.toString() ?? "0";
+      amountController.text = YoCurrencyFormatter.formatCurrency(
+        transaction.value?.amount.toDouble() ?? 0.0,
+      );
       noteController.text = transaction.value?.name ?? "";
       descriptionController.text = transaction.value?.description ?? "";
       budgetController.text = transaction.value?.budgetId ?? "";
+      categoryController.text = category.value?.name ?? "";
+      transactionType.value =
+          transaction.value?.type ?? TransactionType.expense;
 
       await Future.delayed(const Duration(milliseconds: 500));
     } catch (e) {
