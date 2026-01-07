@@ -1,6 +1,7 @@
 import 'package:dhuwitku/apps/core/network/firebase_collection.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/repositories/bottom_nav_bar_repository.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
@@ -40,7 +41,7 @@ class BottomNavBarNetworkDatasource implements BottomNavBarRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> getSummary() async {
+  Future<SummaryModel> getSummary() async {
     try {
       final transactions = await getTransactions();
 
@@ -129,32 +130,32 @@ class BottomNavBarNetworkDatasource implements BottomNavBarRepository {
         lastMonth,
       ).length;
 
-      return {
-        "balance": balance,
-        "balance_last_month": balanceLastMonth,
-        "balance_last_week": balanceLastWeek,
-        "balance_today": balanceToday,
+      return SummaryModel(
+        balance: balance,
+        balanceLastMonth: balanceLastMonth,
+        balanceLastWeek: balanceLastWeek,
+        balanceToday: balanceToday,
 
-        "income": totalIncome,
-        "income_last_month": incomeLastMonth,
-        "income_last_week": incomeLastWeek,
-        "income_today": incomeToday,
+        income: totalIncome,
+        incomeLastMonth: incomeLastMonth,
+        incomeLastWeek: incomeLastWeek,
+        incomeToday: incomeToday,
 
-        "expense": totalExpense,
-        "expense_last_month": expenseLastMonth,
-        "expense_last_week": expenseLastWeek,
-        "expense_today": expenseToday,
+        expense: totalExpense,
+        expenseLastMonth: expenseLastMonth,
+        expenseLastWeek: expenseLastWeek,
+        expenseToday: expenseToday,
 
-        "count_income": countIncome,
-        "count_income_today": countIncomeToday,
-        "count_income_last_month": countIncomeLastMonth,
-        "count_income_last_week": countIncomeLastWeek,
+        countIncome: countIncome,
+        countIncomeToday: countIncomeToday,
+        countIncomeLastMonth: countIncomeLastMonth,
+        countIncomeLastWeek: countIncomeLastWeek,
 
-        "count_expense": countExpense,
-        "count_expense_today": countExpenseToday,
-        "count_expense_last_month": countExpenseLastMonth,
-        "count_expense_last_week": countExpenseLastWeek,
-      };
+        countExpense: countExpense,
+        countExpenseToday: countExpenseToday,
+        countExpenseLastMonth: countExpenseLastMonth,
+        countExpenseLastWeek: countExpenseLastWeek,
+      );
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       throw Exception(e);

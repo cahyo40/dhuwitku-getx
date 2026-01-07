@@ -1,6 +1,7 @@
 import 'package:dhuwitku/apps/controller/auth_controller.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_budgets_usecase.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_categories_usecase.dart';
@@ -32,7 +33,7 @@ class BottomNavBarController extends GetxController {
   final transactions = <TransactionModel>[].obs;
   final budgets = <BudgetModel>[].obs;
   final categories = <CategoryModel>[].obs;
-  final summaries = <String, dynamic>{}.obs;
+  final Rxn<SummaryModel> summaries = Rxn<SummaryModel>();
 
   final currentPage = 0.obs;
 
@@ -72,7 +73,7 @@ class BottomNavBarController extends GetxController {
       transactions.value = res[0] as List<TransactionModel>;
       budgets.value = res[1] as List<BudgetModel>;
       categories.value = res[2] as List<CategoryModel>;
-      summaries.value = res[3] as Map<String, dynamic>;
+      summaries.value = res[3] as SummaryModel;
       error.value = null;
     } catch (e, s) {
       YoLogger.error("$e -> $s");
