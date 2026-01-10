@@ -1,4 +1,5 @@
 import 'package:dhuwitku/apps/core/network/firebase_collection.dart';
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
@@ -34,8 +35,10 @@ class TransactionDetailNetworkDatasource
     try {
       final category = await categoryCollection.doc(id).get();
       return CategoryModel.fromJson(category.data()!);
-    } catch (e) {
-      throw Exception(e);
+    } catch (e, s) {
+      // YoLogger.error("$e -> $s");
+      // throw Exception(e);
+      return defaultExpenseCategories;
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/data/datasource/bottom_nav_bar_network_datasource.dart';
 
@@ -21,7 +22,7 @@ class BottomNavBarRepositoryImpl implements BottomNavBarRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> getSummary() async {
+  Future<SummaryModel> getSummary() async {
     return await _datasource.getSummary();
   }
 

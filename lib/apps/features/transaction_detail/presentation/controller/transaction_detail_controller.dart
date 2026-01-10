@@ -60,7 +60,7 @@ class TransactionDetailController extends GetxController {
     _loadData();
   }
 
-void onUpdate() {
+  void onUpdate() {
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
       try {
@@ -131,9 +131,17 @@ void onUpdate() {
       categoryController.text = category.value?.name ?? "";
       transactionType.value =
           transaction.value?.type ?? TransactionType.expense;
+      categoriesFilter.value = categories
+          .where(
+            (e) =>
+                e.type.name.toLowerCase() ==
+                transactionType.value.name.toLowerCase(),
+          )
+          .toList();
 
       await Future.delayed(const Duration(milliseconds: 500));
-    } catch (e) {
+    } catch (e, s) {
+      YoLogger.error("$e -> $s");
       error.value = e.toString();
     } finally {
       isLoading.value = false;

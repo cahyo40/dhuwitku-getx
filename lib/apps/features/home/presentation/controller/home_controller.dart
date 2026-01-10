@@ -1,5 +1,6 @@
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class HomeController extends GetxController {
   final RxList<TransactionModel> transactions = <TransactionModel>[].obs;
   final RxList<BudgetModel> budgets = <BudgetModel>[].obs;
   final RxList<CategoryModel> categories = <CategoryModel>[].obs;
+  final Rxn<SummaryModel> summary = Rxn<SummaryModel>();
 
   @override
   void onInit() {
@@ -31,6 +33,7 @@ class HomeController extends GetxController {
       budgets.value = Get.find<BottomNavBarController>().budgets;
       transactions.value = Get.find<BottomNavBarController>().transactions;
       categories.value = Get.find<BottomNavBarController>().categories;
+      summary.value = Get.find<BottomNavBarController>().summaries.value;
       transactions.sort((a, b) => b.date.compareTo(a.date));
     } catch (e, s) {
       YoLogger.error("$e -> $s");

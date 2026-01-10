@@ -1,4 +1,6 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,10 +57,10 @@ class SettingsView extends GetView<SettingsController> {
                               spacing: YoAdaptive.spacingXs(context),
                               children: [
                                 YoListTile(
-                                  title: "Manage Workspace",
+                                  title: L10n.t.category.capitalize!,
                                   leading: YoAvatar.icon(
                                     variant: YoAvatarVariant.rounded,
-                                    icon: Iconsax.folder_outline,
+                                    icon: Iconsax.category_outline,
                                     iconColor: primaryColor,
                                     backgroundColor: primaryColor.withValues(
                                       alpha: .2,
@@ -68,7 +70,7 @@ class SettingsView extends GetView<SettingsController> {
                                     Iconsax.arrow_right_3_outline,
                                     color: gray300,
                                   ),
-                                  onTap: () {},
+                                  onTap: () => Get.toNamed(RouteNames.CATEGORY),
                                 ),
                                 YoListTile(
                                   title: "Invite Colaborator",

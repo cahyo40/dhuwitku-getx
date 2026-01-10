@@ -27,8 +27,6 @@ import '../features/transaction_detail/presentation/binding/transaction_detail_b
 import '../features/transaction_detail/presentation/view/transaction_detail_view.dart';
 import '../features/category/presentation/binding/category_binding.dart';
 import '../features/category/presentation/view/category_view.dart';
-import '../features/category_detail/presentation/binding/category_detail_binding.dart';
-import '../features/category_detail/presentation/view/category_detail_view.dart';
 import '../features/category_create/presentation/binding/category_create_binding.dart';
 import '../features/category_create/presentation/view/category_create_view.dart';
 
@@ -105,11 +103,6 @@ class RouteApp {
       name: RouteNames.CATEGORY,
       page: () => const CategoryView(),
       binding: CategoryBinding(),
-    ),
-      GetPage(
-      name: RouteNames.CATEGORY_DETAIL,
-      page: () => const CategoryDetailView(),
-      binding: CategoryDetailBinding(),
     ),
       GetPage(
       name: RouteNames.CATEGORY_CREATE,

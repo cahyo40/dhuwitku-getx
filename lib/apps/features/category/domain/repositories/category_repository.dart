@@ -1,3 +1,3 @@
 abstract class CategoryRepository {
-  // TODO: Define contract methods
+  Future<void> deleteCategory(String id);
 }
