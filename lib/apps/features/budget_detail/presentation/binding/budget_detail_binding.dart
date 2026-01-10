@@ -1,0 +1,12 @@
+import 'package:get/get.dart';
+
+import '../controller/budget_detail_controller.dart';
+
+class BudgetDetailBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<BudgetDetailController>(
+      () => BudgetDetailController(),
+    );
+  }
+}

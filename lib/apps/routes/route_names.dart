@@ -14,4 +14,5 @@ abstract class RouteNames {
   static const String TRANSACTION_DETAIL = '/transaction_detail';
   static const String CATEGORY = '/category';  static const String CATEGORY_CREATE = '/category_create';
   static const String BUDGET_CREATE = '/budget_create';
+  static const String BUDGET_DETAIL = '/budget_detail';
 }

@@ -31,6 +31,8 @@ import '../features/category_create/presentation/binding/category_create_binding
 import '../features/category_create/presentation/view/category_create_view.dart';
 import '../features/budget_create/presentation/binding/budget_create_binding.dart';
 import '../features/budget_create/presentation/view/budget_create_view.dart';
+import '../features/budget_detail/presentation/binding/budget_detail_binding.dart';
+import '../features/budget_detail/presentation/view/budget_detail_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -115,6 +117,11 @@ class RouteApp {
       name: RouteNames.BUDGET_CREATE,
       page: () => const BudgetCreateView(),
       binding: BudgetCreateBinding(),
+    ),
+      GetPage(
+      name: RouteNames.BUDGET_DETAIL,
+      page: () => const BudgetDetailView(),
+      binding: BudgetDetailBinding(),
     ),
   ];
 }
