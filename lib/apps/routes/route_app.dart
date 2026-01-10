@@ -29,6 +29,8 @@ import '../features/category/presentation/binding/category_binding.dart';
 import '../features/category/presentation/view/category_view.dart';
 import '../features/category_create/presentation/binding/category_create_binding.dart';
 import '../features/category_create/presentation/view/category_create_view.dart';
+import '../features/budget_create/presentation/binding/budget_create_binding.dart';
+import '../features/budget_create/presentation/view/budget_create_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -108,6 +110,11 @@ class RouteApp {
       name: RouteNames.CATEGORY_CREATE,
       page: () => const CategoryCreateView(),
       binding: CategoryCreateBinding(),
+    ),
+      GetPage(
+      name: RouteNames.BUDGET_CREATE,
+      page: () => const BudgetCreateView(),
+      binding: BudgetCreateBinding(),
     ),
   ];
 }
