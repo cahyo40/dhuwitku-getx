@@ -1,6 +1,9 @@
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/features/budget_create/domain/usecase/create_budget_usecase.dart';
+import 'package:dhuwitku/apps/features/budget_create/domain/usecase/delete_budget_usecase.dart';
+import 'package:dhuwitku/apps/features/budget_create/domain/usecase/update_budget_usecase.dart';
 import 'package:flutter/material.dart'
     show FormState, GlobalKey, TextEditingController;
 import 'package:get/get.dart';
@@ -11,11 +14,16 @@ class BudgetCreateController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
 
+  // Data
   final budgetId = RxnString();
   final isCreate = RxBool(false);
-
+  //usecase
+  final createBudgetUsecase = CreateBudgetUsecase(Get.find());
+  final deleteBudgetUsecase = DeleteBudgetUsecase(Get.find());
+  final updateBudgetUsecase = UpdateBudgetUsecase(Get.find());
   final getCtagory = Get.find<BottomNavBarController>().getCategories;
 
+  // Form
   final selectedCategory = Rxn<CategoryModel>();
   final categories = RxList<CategoryModel>();
   final categoriesFiltered = RxList<CategoryModel>();
@@ -40,6 +48,14 @@ class BudgetCreateController extends GetxController {
     name.dispose();
     description.dispose();
     category.dispose();
+  }
+
+  void onCreateBudget() {}
+
+  void onDeleteBudget() {
+    if (budgetId.value != null) {
+      deleteBudgetUsecase.call(budgetId.value!);
+    }
   }
 
   void onFilterCategories(BudgetType type) {
@@ -71,9 +87,19 @@ class BudgetCreateController extends GetxController {
     selectedCategory.value = null;
   }
 
+  void onSubmitBudget() {
+    if (isCreate.value == true) {
+      onCreateBudget();
+    } else {
+      onUpdateBudget();
+    }
+  }
+
   void onToggleDateType(int index) {
     selectedDateType.value = index;
   }
+
+  void onUpdateBudget() {}
 
   Future<void> retry() async {
     await _loadData();
