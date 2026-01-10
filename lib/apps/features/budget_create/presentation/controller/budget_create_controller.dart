@@ -1,8 +1,11 @@
+import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
+import 'package:dhuwitku/apps/data/model/icon_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:dhuwitku/apps/features/budget_create/domain/usecase/create_budget_usecase.dart';
 import 'package:dhuwitku/apps/features/budget_create/domain/usecase/delete_budget_usecase.dart';
+import 'package:dhuwitku/apps/features/budget_create/domain/usecase/detail_budget_usecase.dart';
 import 'package:dhuwitku/apps/features/budget_create/domain/usecase/update_budget_usecase.dart';
 import 'package:flutter/material.dart'
     show FormState, GlobalKey, TextEditingController;
@@ -16,11 +19,13 @@ class BudgetCreateController extends GetxController {
 
   // Data
   final budgetId = RxnString();
+  final budget = Rxn<BudgetModel>();
   final isCreate = RxBool(false);
   //usecase
   final createBudgetUsecase = CreateBudgetUsecase(Get.find());
   final deleteBudgetUsecase = DeleteBudgetUsecase(Get.find());
   final updateBudgetUsecase = UpdateBudgetUsecase(Get.find());
+  final getBudgetUsecase = DetailBudgetUsecase(Get.find());
   final getCtagory = Get.find<BottomNavBarController>().getCategories;
 
   // Form
@@ -41,6 +46,31 @@ class BudgetCreateController extends GetxController {
 
   RxInt selectedDateType = 0.obs;
 
+  Future<void> getBudget() async {
+    if (budgetId.value != null) {
+      final data = await getBudgetUsecase.call(budgetId.value!);
+      final ctg = categories.firstWhere(
+        (element) => element.id == data.categoryId,
+      );
+      budget.value = data;
+      name.text = data.name;
+      amount.text = data.amount.toString();
+      description.text = data.description ?? "";
+      category.text = ctg.name;
+      selectedCategory.value = ctg;
+      startDate.value = data.startDate;
+      endDate.value = data.endDate;
+    }
+  }
+
+  IconModel getIcon() {
+    if (budgetType.value == BudgetType.expense) {
+      return defaultIconExpense;
+    } else {
+      return defaultIconIncome;
+    }
+  }
+
   @override
   void onClose() {
     super.onClose();
@@ -50,7 +80,33 @@ class BudgetCreateController extends GetxController {
     category.dispose();
   }
 
-  void onCreateBudget() {}
+  void onCreateBudget() {
+    if (formKey.currentState?.validate() ?? false) {
+      isLoading.value = true;
+      try {
+        final id = YoIdGenerator.alphanumericId();
+        final data = BudgetModel(
+          id: id,
+          uid: auth.uid,
+          name: name.text,
+          isPrivate: true,
+          type: budgetType.value,
+          amount: int.parse(amount.text),
+          icon: selectedCategory.value?.icon ?? getIcon(),
+          startDate: startDate.value,
+          endDate: endDate.value,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        createBudgetUsecase.call(data);
+      } catch (e, s) {
+        YoLogger.error("$e -> $s");
+        YoSnackBar.error(Get.context!, e.toString());
+      } finally {
+        isLoading.value = false;
+      }
+    }
+  }
 
   void onDeleteBudget() {
     if (budgetId.value != null) {
@@ -99,7 +155,32 @@ class BudgetCreateController extends GetxController {
     selectedDateType.value = index;
   }
 
-  void onUpdateBudget() {}
+  void onUpdateBudget() {
+    if (formKey.currentState?.validate() ?? false) {
+      isLoading.value = true;
+      try {
+        final data = BudgetModel(
+          id: budgetId.value!,
+          uid: budget.value?.uid ?? auth.uid,
+          name: name.text,
+          isPrivate: true,
+          type: budgetType.value,
+          amount: int.parse(amount.text),
+          icon: selectedCategory.value?.icon ?? budget.value?.icon ?? getIcon(),
+          startDate: startDate.value,
+          endDate: endDate.value,
+          createdAt: budget.value?.createdAt ?? DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        updateBudgetUsecase.call(data);
+      } catch (e, s) {
+        YoLogger.error("$e -> $s");
+        YoSnackBar.error(Get.context!, e.toString());
+      } finally {
+        isLoading.value = false;
+      }
+    }
+  }
 
   Future<void> retry() async {
     await _loadData();

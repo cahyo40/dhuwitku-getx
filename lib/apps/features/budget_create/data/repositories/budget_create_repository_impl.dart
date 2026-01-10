@@ -19,6 +19,11 @@ class BudgetCreateRepositoryImpl implements BudgetCreateRepository {
   }
 
   @override
+  Future<BudgetModel> getBudget(String id) async {
+    return await _network.getBudget(id);
+  }
+
+  @override
   Future<void> updateBudget(BudgetModel model) async {
     return await _network.updateBudget(model);
   }

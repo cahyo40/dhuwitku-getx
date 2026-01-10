@@ -17,6 +17,18 @@ final defaultExpenseCategories = CategoryModel(
   createdAt: DateTime.now(),
 );
 
+final defaultIconExpense = IconModel(
+  codePoint: Iconsax.money_send_outline.codePoint,
+  fontFamily: Iconsax.money_send_outline.fontFamily,
+  fontPackage: Iconsax.money_send_outline.fontPackage,
+);
+
+final defaultIconIncome = IconModel(
+  codePoint: Iconsax.money_recive_outline.codePoint,
+  fontFamily: Iconsax.money_recive_outline.fontFamily,
+  fontPackage: Iconsax.money_recive_outline.fontPackage,
+);
+
 final defaultIncomeCategories = CategoryModel(
   id: 'income_default',
   budgetId: "all",

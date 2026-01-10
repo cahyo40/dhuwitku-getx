@@ -31,6 +31,17 @@ class BudgetCreateNetworkDatasource implements BudgetCreateRepository {
   }
 
   @override
+  Future<BudgetModel> getBudget(String id) async {
+    try {
+      final doc = await budgetCollection.doc(id).get();
+      return BudgetModel.fromJson(doc.data()!);
+    } catch (e, s) {
+      YoLogger.error("$e -> $s");
+      throw Exception(e);
+    }
+  }
+
+  @override
   Future<void> updateBudget(BudgetModel model) async {
     try {
       final data = model.toJson();

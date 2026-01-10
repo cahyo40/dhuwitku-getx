@@ -9,6 +9,11 @@ class BudgetActionButtonScreen extends GetView<BudgetCreateController> {
 
   @override
   Widget build(BuildContext context) {
-    return YoButton.primary(text: "SAVE", onPressed: () {});
+    return YoButton.primary(
+      text: "SAVE",
+      onPressed: () {
+        controller.onSubmitBudget();
+      },
+    );
   }
 }
