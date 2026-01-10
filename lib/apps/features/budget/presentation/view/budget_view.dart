@@ -1,3 +1,5 @@
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +11,16 @@ class BudgetView extends GetView<BudgetController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Budget'.tr),
-        centerTitle: true,
+      appBar: AppBar(title: Text('Budget'.tr), centerTitle: true),
+      floatingActionButton: FloatingActionButton(
+        key: Key("${auth.uid}_BudgetCreate"),
+        onPressed: () {
+          Get.toNamed(
+            RouteNames.BUDGET_CREATE,
+            arguments: {"isCreate": true, "budgetId": null},
+          );
+        },
+        child: const Icon(Icons.add),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
