@@ -4,6 +4,7 @@ import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bo
 import 'package:flutter/material.dart'
     show FormState, GlobalKey, TextEditingController;
 import 'package:get/get.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 class BudgetCreateController extends GetxController {
   // State
@@ -12,6 +13,8 @@ class BudgetCreateController extends GetxController {
 
   final budgetId = RxnString();
   final isCreate = RxBool(false);
+
+  final getCtagory = Get.find<BottomNavBarController>().getCategories;
 
   final selectedCategory = Rxn<CategoryModel>();
   final categories = RxList<CategoryModel>();
@@ -26,6 +29,10 @@ class BudgetCreateController extends GetxController {
   final description = TextEditingController();
   final category = TextEditingController();
 
+  List<String> dateTypes = ["type_month", "type_custom"];
+
+  RxInt selectedDateType = 0.obs;
+
   @override
   void onClose() {
     super.onClose();
@@ -35,10 +42,12 @@ class BudgetCreateController extends GetxController {
     category.dispose();
   }
 
-  void onFilterCategories() {
+  void onFilterCategories(BudgetType type) {
+    budgetType.value = type;
     categoriesFiltered.value = categories
         .where((element) => element.type.name == budgetType.value.name)
         .toList();
+    YoLogger.info("${categoriesFiltered.length}");
     if (isCreate.value == true) {
       onResetForm();
     }
@@ -62,6 +71,10 @@ class BudgetCreateController extends GetxController {
     selectedCategory.value = null;
   }
 
+  void onToggleDateType(int index) {
+    selectedDateType.value = index;
+  }
+
   Future<void> retry() async {
     await _loadData();
   }
@@ -70,7 +83,12 @@ class BudgetCreateController extends GetxController {
     try {
       isLoading.value = true;
       error.value = null;
-      categories.value = Get.find<BottomNavBarController>().categories;
+      categories.value = await getCtagory();
+      YoLogger.info("${categories.length}");
+      categoriesFiltered.value = categories
+          .where((element) => element.type.name == budgetType.value.name)
+          .toList();
+      YoLogger.info("${categoriesFiltered.length}");
 
       await Future.delayed(const Duration(milliseconds: 500));
     } catch (e) {

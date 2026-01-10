@@ -5,6 +5,7 @@ import 'package:dhuwitku/apps/features/budget_create/presentation/view/screen/bu
 import 'package:dhuwitku/apps/features/budget_create/presentation/view/screen/budget_date_form_screen.dart';
 import 'package:dhuwitku/apps/features/budget_create/presentation/view/screen/budget_description_form_screen.dart';
 import 'package:dhuwitku/apps/features/budget_create/presentation/view/screen/budget_name_form_screen.dart';
+import 'package:dhuwitku/apps/features/budget_create/presentation/view/screen/budget_type_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yo_ui/yo_ui.dart';
@@ -37,6 +38,7 @@ class BudgetCreateView extends GetView<BudgetCreateController> {
           child: ListView(
             padding: YoPadding.all16,
             children: [
+              BudgetTypeFormScreen(),
               BudgetAmountFormScreen(),
               BudgetNameFormScreen(),
               BudgetCategoryFormScreen(),

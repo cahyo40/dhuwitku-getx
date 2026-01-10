@@ -12,7 +12,7 @@ class BudgetAmountFormScreen extends GetView<BudgetCreateController> {
   @override
   Widget build(BuildContext context) {
     return YoColumn(
-      margin: YoPadding.vertical16,
+      margin: YoPadding.bottom16,
       spacing: YoAdaptive.spacingSm(context),
       crossAxisAlignment: .start,
       children: [
