@@ -1,3 +1,5 @@
+import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
 
 class BudgetController extends GetxController {
@@ -5,34 +7,35 @@ class BudgetController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxnString error = RxnString();
 
+  // data
+  final RxList<BudgetModel> budgets = RxList<BudgetModel>();
+  final RxList<BudgetModel> budgetsFiltered = RxList<BudgetModel>();
+
+  // use case
+  final getBudgetsUsecase = Get.find<BottomNavBarController>().getBudgets;
+
   @override
   void onInit() {
     super.onInit();
     _loadData();
   }
 
-  Future<void> _loadData() async {
+  Future<void> retry({bool useLoading = false}) async {
+    await _loadData(useLoading: useLoading);
+  }
+
+  Future<void> _loadData({bool useLoading = true}) async {
     try {
-      isLoading.value = true;
+      isLoading.value = useLoading;
       error.value = null;
-      
-      // TODO: Load data from usecase
-      await Future.delayed(const Duration(milliseconds: 500));
-      
+
+      final res = await Future.wait([getBudgetsUsecase.call()]);
+      budgets.value = res[0];
+      budgetsFiltered.value = budgets;
     } catch (e) {
       error.value = e.toString();
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> retry() async {
-    await _loadData();
-  }
-
-  @override
-  void onClose() {
-    // TODO: Dispose resources
-    super.onClose();
   }
 }

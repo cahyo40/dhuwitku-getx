@@ -104,6 +104,7 @@ class BudgetCreateController extends GetxController {
         YoSnackBar.error(Get.context!, e.toString());
       } finally {
         isLoading.value = false;
+        Get.back(result: "create");
       }
     }
   }
@@ -111,6 +112,7 @@ class BudgetCreateController extends GetxController {
   void onDeleteBudget() {
     if (budgetId.value != null) {
       deleteBudgetUsecase.call(budgetId.value!);
+      Get.back(result: "delete");
     }
   }
 
@@ -178,6 +180,7 @@ class BudgetCreateController extends GetxController {
         YoSnackBar.error(Get.context!, e.toString());
       } finally {
         isLoading.value = false;
+        Get.back(result: "update");
       }
     }
   }
