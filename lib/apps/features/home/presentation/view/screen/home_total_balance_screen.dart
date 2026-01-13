@@ -33,10 +33,14 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       ],
                     ),
 
-                    YoText.monoLarge(
-                      YoCurrencyFormatter.formatCurrency(4000000),
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
+                    Obx(
+                      () => YoText.monoLarge(
+                        YoCurrencyFormatter.formatCurrency(
+                          controller.summary.value?.balance.toDouble() ?? 0,
+                        ),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Container(
                       padding: YoPadding.all8,
@@ -95,9 +99,13 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       ],
                     ),
                     YoSpace.adaptiveSm(),
-                    YoText.monoLarge(
-                      YoCurrencyFormatter.formatCurrency(4000000),
-                      fontSize: 18,
+                    Obx(
+                      () => YoText.monoLarge(
+                        YoCurrencyFormatter.formatCurrency(
+                          controller.summary.value?.income.toDouble() ?? 0,
+                        ),
+                        fontSize: 18,
+                      ),
                     ),
                     YoSpace.adaptiveSm(),
                     YoText.bodySmall(
@@ -125,7 +133,9 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                     ),
                     YoSpace.adaptiveSm(),
                     YoText.monoLarge(
-                      YoCurrencyFormatter.formatCurrency(4000000),
+                      YoCurrencyFormatter.formatCurrency(
+                        controller.summary.value?.expense.toDouble() ?? 0,
+                      ),
                       fontSize: 18,
                     ),
                     YoSpace.adaptiveSm(),

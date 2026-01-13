@@ -47,6 +47,7 @@ class BottomNavBarController extends GetxController {
 
   void onChangePage(int index) {
     currentPage.value = index;
+
     if (index == 1) {
       Get.find<TransactionController>().retry();
     } else if (index == 2) {
@@ -55,6 +56,8 @@ class BottomNavBarController extends GetxController {
       Get.find<ReportController>().retry();
     } else if (index == 4) {
       Get.find<SettingsController>().retry();
+    } else if (index == 0) {
+      Get.find<HomeController>().retry();
     } else {
       retry();
     }
