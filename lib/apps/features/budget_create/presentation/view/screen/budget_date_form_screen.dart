@@ -50,17 +50,29 @@ class BudgetDateFormScreen extends GetView<BudgetCreateController> {
         YoTextFormField(
           readOnly: true,
           onTap: () async {
-            final date = await YoDialogPicker.month(context: context,);
-
+            late DateTimeRange? date;
+            if (controller.selectedDateType.value == 0) {
+              date = await YoDialogPicker.month(context: context);
+            } else {
+              date = await YoDialogPicker.dateRange(context: context);
+            }
             if (date != null) {
-              YoLogger.info("$date");
-              controller.startDate.value = date;
-              controller.endDate.value = date;
-              YoLogger.info("${controller.startDate.value}");
-              YoLogger.info("${controller.endDate.value}");
+              controller.startDate.value = date.start;
+              controller.endDate.value = date.end;
+            }
+
+            if (controller.selectedDateType.value == 0) {
+              controller.dateController.text = YoDateFormatter.getMonthName(
+                date!.start.month,
+              );
+            } else {
+              controller.dateController.text = YoDateFormatter.formatDateRange(
+                date!.start,
+                date.end,
+              );
             }
           },
-
+          controller: controller.dateController,
           inputStyle: YoInputStyle.modern,
           hintText: L10n.t.hint_select_date,
           isRequired: true,

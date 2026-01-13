@@ -6,6 +6,14 @@ import '../features/bottom_nav_bar/presentation/binding/bottom_nav_bar_binding.d
 import '../features/bottom_nav_bar/presentation/view/bottom_nav_bar_view.dart';
 import '../features/budget/presentation/binding/budget_binding.dart';
 import '../features/budget/presentation/view/budget_view.dart';
+import '../features/budget_create/presentation/binding/budget_create_binding.dart';
+import '../features/budget_create/presentation/view/budget_create_view.dart';
+import '../features/budget_detail/presentation/binding/budget_detail_binding.dart';
+import '../features/budget_detail/presentation/view/budget_detail_view.dart';
+import '../features/category/presentation/binding/category_binding.dart';
+import '../features/category/presentation/view/category_view.dart';
+import '../features/category_create/presentation/binding/category_create_binding.dart';
+import '../features/category_create/presentation/view/category_create_view.dart';
 import '../features/home/presentation/controller/binding/home_binding.dart';
 import '../features/home/presentation/view/home_view.dart';
 import '../features/login/presentation/binding/login_binding.dart';
@@ -20,19 +28,11 @@ import '../features/splash_screen/presentation/binding/splash_screen_binding.dar
 import '../features/splash_screen/presentation/view/splash_screen_view.dart';
 import '../features/transaction/presentation/binding/transaction_binding.dart';
 import '../features/transaction/presentation/view/transaction_view.dart';
-import 'route_names.dart';
 import '../features/transaction_create/presentation/binding/transaction_create_binding.dart';
 import '../features/transaction_create/presentation/view/transaction_create_view.dart';
 import '../features/transaction_detail/presentation/binding/transaction_detail_binding.dart';
 import '../features/transaction_detail/presentation/view/transaction_detail_view.dart';
-import '../features/category/presentation/binding/category_binding.dart';
-import '../features/category/presentation/view/category_view.dart';
-import '../features/category_create/presentation/binding/category_create_binding.dart';
-import '../features/category_create/presentation/view/category_create_view.dart';
-import '../features/budget_create/presentation/binding/budget_create_binding.dart';
-import '../features/budget_create/presentation/view/budget_create_view.dart';
-import '../features/budget_detail/presentation/binding/budget_detail_binding.dart';
-import '../features/budget_detail/presentation/view/budget_detail_view.dart';
+import 'route_names.dart';
 
 class RouteApp {
   static final routes = [
@@ -93,32 +93,32 @@ class RouteApp {
       page: () => const SettingsView(),
       binding: SettingsBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.TRANSACTION_CREATE,
       page: () => const TransactionCreateView(),
       binding: TransactionCreateBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.TRANSACTION_DETAIL,
       page: () => const TransactionDetailView(),
       binding: TransactionDetailBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.CATEGORY,
       page: () => const CategoryView(),
       binding: CategoryBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.CATEGORY_CREATE,
       page: () => const CategoryCreateView(),
       binding: CategoryCreateBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.BUDGET_CREATE,
       page: () => const BudgetCreateView(),
       binding: BudgetCreateBinding(),
     ),
-      GetPage(
+    GetPage(
       name: RouteNames.BUDGET_DETAIL,
       page: () => const BudgetDetailView(),
       binding: BudgetDetailBinding(),

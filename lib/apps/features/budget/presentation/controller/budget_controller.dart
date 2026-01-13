@@ -1,5 +1,5 @@
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
-import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_budgets_usecase.dart';
 import 'package:get/get.dart';
 
 class BudgetController extends GetxController {
@@ -12,7 +12,7 @@ class BudgetController extends GetxController {
   final RxList<BudgetModel> budgetsFiltered = RxList<BudgetModel>();
 
   // use case
-  final getBudgetsUsecase = Get.find<BottomNavBarController>().getBudgets;
+  final getBudgetsUsecase = GetBudgetsUsecase(Get.find());
 
   @override
   void onInit() {

@@ -35,17 +35,20 @@ class BudgetCreateView extends GetView<BudgetCreateController> {
         }
 
         return SafeArea(
-          child: ListView(
-            padding: YoPadding.all16,
-            children: [
-              BudgetTypeFormScreen(),
-              BudgetAmountFormScreen(),
-              BudgetNameFormScreen(),
-              BudgetCategoryFormScreen(),
-              BudgetDateFormScreen(),
-              BudgetDescriptionFormScreen(),
-              BudgetActionButtonScreen(),
-            ],
+          child: Form(
+            key: controller.formKey,
+            child: ListView(
+              padding: YoPadding.all16,
+              children: [
+                BudgetTypeFormScreen(),
+                BudgetAmountFormScreen(),
+                BudgetNameFormScreen(),
+                BudgetCategoryFormScreen(),
+                BudgetDateFormScreen(),
+                BudgetDescriptionFormScreen(),
+                BudgetActionButtonScreen(),
+              ],
+            ),
           ),
         );
       }),

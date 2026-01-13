@@ -33,7 +33,7 @@ class BudgetCreateController extends GetxController {
   final categories = RxList<CategoryModel>();
   final categoriesFiltered = RxList<CategoryModel>();
   final budgetType = BudgetType.expense.obs;
-
+  final dateController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final amount = TextEditingController();
   final name = TextEditingController();
@@ -88,6 +88,9 @@ class BudgetCreateController extends GetxController {
         final data = BudgetModel(
           id: id,
           uid: auth.uid,
+          categoryId: selectedCategory.value!.id,
+          color: selectedCategory.value!.color,
+          description: description.text,
           name: name.text,
           isPrivate: true,
           type: budgetType.value,
@@ -146,6 +149,7 @@ class BudgetCreateController extends GetxController {
   }
 
   void onSubmitBudget() {
+    YoLogger.info("${formKey.currentState?.validate()}");
     if (isCreate.value == true) {
       onCreateBudget();
     } else {
@@ -172,6 +176,9 @@ class BudgetCreateController extends GetxController {
           startDate: startDate.value,
           endDate: endDate.value,
           createdAt: budget.value?.createdAt ?? DateTime.now(),
+          categoryId: selectedCategory.value!.id,
+          color: selectedCategory.value!.color,
+          description: description.text,
           updatedAt: DateTime.now(),
         );
         updateBudgetUsecase.call(data);
