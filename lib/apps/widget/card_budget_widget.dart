@@ -6,9 +6,15 @@ import 'package:yo_ui/yo_ui.dart';
 
 class CardBudgetWidget extends StatelessWidget {
   final void Function()? onTap;
+  final void Function()? onLongPress;
 
   final BudgetResponseModel data;
-  const CardBudgetWidget({super.key, this.onTap, required this.data});
+  const CardBudgetWidget({
+    super.key,
+    this.onTap,
+    this.onLongPress,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,129 +57,120 @@ class CardBudgetWidget extends StatelessWidget {
       }
     }
 
-    String message() {
-      if (decimalAmount() > 1) {
-        return "Over";
-      } else if (decimalAmount() > 0.74 && decimalAmount() < 0.999) {
-        return "Warning";
-      } else if (decimalAmount() < 0.74) {
-        return "Oke";
-      } else {
-        return "";
-      }
-    }
-
     return Padding(
       padding: YoPadding.bottom16,
-      child: YoCard(
+      child: InkWell(
         onTap: onTap,
-        child: SizedBox(
-          child: YoColumn(
-            spacing: YoSpacing.md,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              YoRow(
-                spacing: YoSpacing.md,
-                children: [
-                  YoAvatar.icon(
-                    icon: IconData(
-                      budget.icon.codePoint,
-                      fontFamily: budget.icon.fontFamily,
-                      fontPackage: budget.icon.fontPackage,
+        onLongPress: onLongPress,
+        child: YoCard(
+          child: SizedBox(
+            child: YoColumn(
+              spacing: YoSpacing.md,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                YoRow(
+                  spacing: YoSpacing.md,
+                  children: [
+                    YoAvatar.icon(
+                      icon: IconData(
+                        budget.icon.codePoint,
+                        fontFamily: budget.icon.fontFamily,
+                        fontPackage: budget.icon.fontPackage,
+                      ),
+                      iconColor: color,
+                      variant: YoAvatarVariant.rounded,
+                      backgroundColor: color.withOpacity(.25),
                     ),
-                    iconColor: color,
-                    variant: YoAvatarVariant.rounded,
-                    backgroundColor: color.withOpacity(.25),
-                  ),
-                  Expanded(
-                    child: YoColumn(
-                      crossAxisAlignment: .start,
+                    Expanded(
+                      child: YoColumn(
+                        crossAxisAlignment: .start,
+                        children: [
+                          YoText.titleMedium(
+                            budget.name.capitalize!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          YoText.bodySmall(
+                            budget.isPrivate ? "Pribadi" : "Share",
+                            color: gray400,
+                          ),
+                        ],
+                      ),
+                    ),
+                    YoAvatar.icon(
+                      icon: iconChip(),
+                      iconColor: colorChip(),
+                      backgroundColor: colorChip().withOpacity(.25),
+                    ),
+                  ],
+                ),
+
+                YoRow(
+                  spacing: YoAdaptive.spacingXs(context),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    YoRow(
                       children: [
-                        YoText.titleMedium(
-                          budget.name.capitalize!,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        YoText.bodyMedium("Date Range ", color: gray400),
+                        YoText.monoMedium(
+                          YoDateFormatter.formatDateRange(
+                            budget.startDate,
+                            budget.endDate,
+                          ),
                           fontWeight: FontWeight.bold,
-                        ),
-                        YoText.bodySmall(
-                          budget.isPrivate ? "Pribadi" : "Share",
-                          color: gray400,
                         ),
                       ],
                     ),
-                  ),
-                  YoAvatar.icon(
-                    icon: iconChip(),
-                    iconColor: colorChip(),
-                    backgroundColor: colorChip().withOpacity(.25),
-                  ),
-                ],
-              ),
-
-              YoRow(
-                spacing: YoAdaptive.spacingXs(context),
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  YoRow(
-                    children: [
-                      YoText.bodyMedium("Date Range ", color: gray400),
-                      YoText.monoMedium(
-                        YoDateFormatter.formatDateRange(
-                          budget.startDate,
-                          budget.endDate,
+                    YoRow(
+                      children: [
+                        YoText.bodyMedium("Transactions ", color: gray400),
+                        YoText.monoMedium(
+                          countTransactions.toString(),
+                          fontWeight: FontWeight.bold,
                         ),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ],
-                  ),
-                  YoRow(
-                    children: [
-                      YoText.bodyMedium("Transactions ", color: gray400),
-                      YoText.monoMedium(
-                        countTransactions.toString(),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                      ],
+                    ),
+                  ],
+                ),
 
-              YoProgress.linear(
-                value: decimalAmount(),
-                backgroundColor: color.withOpacity(.25),
-                color: color,
-                size: YoProgressSize.large,
-                label: percentageAmount(),
-              ),
+                YoProgress.linear(
+                  value: decimalAmount(),
+                  backgroundColor: color.withOpacity(.25),
+                  color: color,
+                  size: YoProgressSize.large,
+                  label: percentageAmount(),
+                ),
 
-              YoRow(
-                mainAxisAlignment: .spaceBetween,
-                children: [
-                  YoRow(
-                    children: [
-                      YoText.bodyMedium("Pengeluaran ", color: gray400),
-                      YoText.monoMedium(
-                        YoCurrencyFormatter.formatCurrency(
-                          totalAmount.toDouble(),
+                YoRow(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    YoRow(
+                      children: [
+                        YoText.bodyMedium("Pengeluaran ", color: gray400),
+                        YoText.monoMedium(
+                          YoCurrencyFormatter.formatCurrency(
+                            totalAmount.toDouble(),
+                          ),
+                          fontWeight: FontWeight.bold,
                         ),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ],
-                  ),
-                  YoRow(
-                    children: [
-                      YoText.bodyMedium("Anggaran ", color: gray400),
-                      YoText.monoMedium(
-                        YoCurrencyFormatter.formatCurrency(
-                          budget.amount.toDouble(),
+                      ],
+                    ),
+                    YoRow(
+                      children: [
+                        YoText.bodyMedium("Anggaran ", color: gray400),
+                        YoText.monoMedium(
+                          YoCurrencyFormatter.formatCurrency(
+                            budget.amount.toDouble(),
+                          ),
+                          fontWeight: FontWeight.bold,
                         ),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -34,7 +34,6 @@ class HomeController extends GetxController {
       transactions.value = Get.find<BottomNavBarController>().transactions;
       categories.value = Get.find<BottomNavBarController>().categories;
       summary.value = Get.find<BottomNavBarController>().summaries.value;
-      YoLogger.info("HomeController: ${summary.value!.toJson()}");
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       error.value = e.toString();

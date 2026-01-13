@@ -132,11 +132,13 @@ class HomeTotalBalanceScreen extends GetView<HomeController> {
                       ],
                     ),
                     YoSpace.adaptiveSm(),
-                    YoText.monoLarge(
-                      YoCurrencyFormatter.formatCurrency(
-                        controller.summary.value?.expense.toDouble() ?? 0,
+                    Obx(
+                      () => YoText.monoLarge(
+                        YoCurrencyFormatter.formatCurrency(
+                          controller.summary.value?.expense.toDouble() ?? 0,
+                        ),
+                        fontSize: 18,
                       ),
-                      fontSize: 18,
                     ),
                     YoSpace.adaptiveSm(),
                     YoText.bodySmall(

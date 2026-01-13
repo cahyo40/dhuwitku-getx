@@ -41,7 +41,8 @@ class BottomNavBarNetworkDatasource implements BottomNavBarRepository {
         // Start with base query for transactions of this budget
         var query = transactionCollection
             .where("uid", isEqualTo: userId)
-            .where("categoryId", isEqualTo: budget.categoryId);
+            .where("categoryId", isEqualTo: budget.categoryId)
+            .orderBy("createdAt", descending: true);
 
         final transRes = await query.get();
 

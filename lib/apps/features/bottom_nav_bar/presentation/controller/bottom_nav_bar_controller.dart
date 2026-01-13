@@ -37,14 +37,6 @@ class BottomNavBarController extends GetxController {
 
   final currentPage = 0.obs;
 
-  List controllers = [
-    Get.find<HomeController>(),
-    Get.find<TransactionController>(),
-    Get.find<BudgetController>(),
-    Get.find<ReportController>(),
-    Get.find<SettingsController>(),
-  ];
-
   void onChangePage(int index) {
     currentPage.value = index;
 
@@ -88,6 +80,7 @@ class BottomNavBarController extends GetxController {
       categories.value = res[2] as List<CategoryModel>;
       summaries.value = res[3] as SummaryModel;
       error.value = null;
+      Get.put<HomeController>(HomeController()).onInit();
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       error.value = e.toString();

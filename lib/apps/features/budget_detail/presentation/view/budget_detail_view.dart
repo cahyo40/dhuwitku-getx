@@ -1,6 +1,8 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
+import 'package:dhuwitku/apps/features/budget_detail/presentation/view/screen/budget_detail_information_screen.dart';
+import 'package:dhuwitku/apps/features/budget_detail/presentation/view/screen/budget_detail_transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 import '../controller/budget_detail_controller.dart';
@@ -11,17 +13,14 @@ class BudgetDetailView extends GetView<BudgetDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('BudgetDetail'.tr),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('BudgetDetail'.tr), centerTitle: true),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: YoLoading());
         }
 
-       if (controller.error.value != null) {
-           return Center(
+        if (controller.error.value != null) {
+          return Center(
             child: YoErrorState(
               onRetry: controller.retry,
               title: L10n.t.error_title,
@@ -30,12 +29,14 @@ class BudgetDetailView extends GetView<BudgetDetailController> {
           );
         }
 
-        return const SafeArea(
-          child: Center(
-            child: Text(
-              'BudgetDetailView is working',
-              style: TextStyle(fontSize: 20),
-            ),
+        return SafeArea(
+          child: ListView(
+            padding: YoPadding.all16,
+            physics: ClampingScrollPhysics(),
+            children: [
+              BudgetDetailInformationScreen(),
+              BudgetDetailTransactionScreen(),
+            ],
           ),
         );
       }),

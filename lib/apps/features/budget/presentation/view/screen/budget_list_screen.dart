@@ -1,3 +1,4 @@
+import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:dhuwitku/apps/widget/card_budget_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,12 @@ class BudgetListScreen extends GetView<BudgetController> {
         itemCount: controller.budgetsFiltered.length,
         itemBuilder: (context, index) {
           final data = controller.budgetsFiltered[index];
-          return CardBudgetWidget(data: data);
+          return CardBudgetWidget(
+            data: data,
+            onTap: () {
+              Get.toNamed(RouteNames.BUDGET_DETAIL, arguments: {"data": data});
+            },
+          );
         },
       ),
     );

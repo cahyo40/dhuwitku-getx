@@ -33,6 +33,8 @@ import '../features/transaction_create/presentation/view/transaction_create_view
 import '../features/transaction_detail/presentation/binding/transaction_detail_binding.dart';
 import '../features/transaction_detail/presentation/view/transaction_detail_view.dart';
 import 'route_names.dart';
+import '../features/budget_view/presentation/binding/budget_view_binding.dart';
+import '../features/budget_view/presentation/view/budget_view_view.dart';
 
 class RouteApp {
   static final routes = [
@@ -122,6 +124,11 @@ class RouteApp {
       name: RouteNames.BUDGET_DETAIL,
       page: () => const BudgetDetailView(),
       binding: BudgetDetailBinding(),
+    ),
+      GetPage(
+      name: RouteNames.BUDGET_VIEW,
+      page: () => const BudgetViewView(),
+      binding: BudgetViewBinding(),
     ),
   ];
 }
