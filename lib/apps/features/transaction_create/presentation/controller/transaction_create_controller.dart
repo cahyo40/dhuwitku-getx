@@ -1,5 +1,6 @@
 import 'package:dhuwitku/apps/data/dummy_data.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_budgets_usecase.dart';
@@ -17,7 +18,7 @@ class TransactionCreateController extends GetxController {
   // Data
   final categories = <CategoryModel>[].obs;
   final categoriesFilter = <CategoryModel>[].obs;
-  final budgets = <BudgetModel>[].obs;
+  final budgets = <BudgetResponseModel>[].obs;
 
   // Usecase
   final GetCategoriesUsecase getCategoriesUsecase = GetCategoriesUsecase(
@@ -138,7 +139,7 @@ class TransactionCreateController extends GetxController {
         getBudgetsUsecase.call(),
         getCategoriesUsecase.call(),
       ]);
-      budgets.value = res[0] as List<BudgetModel>;
+      budgets.value = res[0] as List<BudgetResponseModel>;
       categories.value = res[1] as List<CategoryModel>;
       categoriesFilter.value = categories
           .where(

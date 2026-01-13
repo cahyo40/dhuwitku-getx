@@ -17,10 +17,16 @@ class HomeBudgetScreen extends GetView<HomeController> {
       children: [
         YoText.titleMedium(L10n.t.active_budget, fontWeight: FontWeight.bold),
         YoSpace.adaptiveMd(),
-        ListView(
+        ListView.builder(
           physics: ClampingScrollPhysics(),
           shrinkWrap: true,
-          children: [CardBudgetWidget(), CardBudgetWidget()],
+          itemCount: controller.budgets.length > 3
+              ? 3
+              : controller.budgets.length,
+          itemBuilder: (context, index) {
+            final data = controller.budgets[index];
+            return CardBudgetWidget(data: data);
+          },
         ),
       ],
     );

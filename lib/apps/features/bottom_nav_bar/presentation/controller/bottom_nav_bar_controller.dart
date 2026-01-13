@@ -1,5 +1,5 @@
 import 'package:dhuwitku/apps/controller/auth_controller.dart';
-import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
@@ -31,24 +31,33 @@ class BottomNavBarController extends GetxController {
   final getSummaries = GetSummariesUsecase(Get.find());
   // Data
   final transactions = <TransactionModel>[].obs;
-  final budgets = <BudgetModel>[].obs;
+  final budgets = <BudgetResponseModel>[].obs;
   final categories = <CategoryModel>[].obs;
   final Rxn<SummaryModel> summaries = Rxn<SummaryModel>();
 
   final currentPage = 0.obs;
 
   List controllers = [
-    HomeController(),
-    TransactionController(),
-    BudgetController(),
-    ReportController(),
-    SettingsController(),
+    Get.find<HomeController>(),
+    Get.find<TransactionController>(),
+    Get.find<BudgetController>(),
+    Get.find<ReportController>(),
+    Get.find<SettingsController>(),
   ];
 
   void onChangePage(int index) {
     currentPage.value = index;
-    retry();
-    controllers[currentPage.value].onInit();
+    if (index == 1) {
+      Get.find<TransactionController>().retry();
+    } else if (index == 2) {
+      Get.find<BudgetController>().retry(useLoading: true);
+    } else if (index == 3) {
+      Get.find<ReportController>().retry();
+    } else if (index == 4) {
+      Get.find<SettingsController>().retry();
+    } else {
+      retry();
+    }
   }
 
   @override
@@ -58,6 +67,7 @@ class BottomNavBarController extends GetxController {
   }
 
   Future<void> retry() async {
+    YoLogger.info("Retry BottomController");
     await _loadData(useLoading: false);
   }
 
@@ -71,7 +81,7 @@ class BottomNavBarController extends GetxController {
         getSummaries.call(),
       ]);
       transactions.value = res[0] as List<TransactionModel>;
-      budgets.value = res[1] as List<BudgetModel>;
+      budgets.value = res[1] as List<BudgetResponseModel>;
       categories.value = res[2] as List<CategoryModel>;
       summaries.value = res[3] as SummaryModel;
       error.value = null;

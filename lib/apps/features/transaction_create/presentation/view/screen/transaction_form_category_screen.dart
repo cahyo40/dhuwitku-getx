@@ -64,7 +64,7 @@ class TransactionFormCategoryScreen
                           final icon = category.icon;
                           return YoListTile(
                             selected:
-                                controller.selectedCategory.value!.id ==
+                                controller.selectedCategory.value?.id ==
                                 category.id,
                             title: category.name.capitalize,
                             leading: Icon(

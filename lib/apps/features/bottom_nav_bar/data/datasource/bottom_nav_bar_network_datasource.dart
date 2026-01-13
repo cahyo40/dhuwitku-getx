@@ -1,5 +1,6 @@
 import 'package:dhuwitku/apps/core/network/firebase_collection.dart';
 import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
@@ -12,14 +13,85 @@ class BottomNavBarNetworkDatasource implements BottomNavBarRepository {
 
   BottomNavBarNetworkDatasource();
 
+  /// Mendapatkan daftar budget beserta transaksi dan total transaksi
+  /// dengan filter optional:
+  /// - [uid] - User ID (default: auth.uid)
+  /// - [categoryId] - Category ID (optional)
+  /// - [startDate] - Tanggal mulai filter (optional)
+  /// - [endDate] - Tanggal akhir filter (optional)
   @override
-  Future<List<BudgetModel>> getBudgets() async {
+  Future<List<BudgetResponseModel>> getBudgets() async {
     try {
-      final res = await budgetCollection
-          .where("uid", isEqualTo: auth.uid)
+      final userId = auth.uid;
+
+      // Get all budgets for the user
+      final budgetRes = await budgetCollection
+          .where("uid", isEqualTo: userId)
+          .orderBy("createdAt", descending: true)
           .get();
 
-      return res.docs.map((e) => BudgetModel.fromJson(e.data())).toList();
+      final budgets = budgetRes.docs
+          .map((e) => BudgetModel.fromJson(e.data()))
+          .toList();
+
+      // Build response with filtered transactions for each budget
+      final result = <BudgetResponseModel>[];
+
+      for (final budget in budgets) {
+        // Start with base query for transactions of this budget
+        var query = transactionCollection
+            .where("uid", isEqualTo: userId)
+            .where("categoryId", isEqualTo: budget.categoryId);
+
+        final transRes = await query.get();
+
+        // Convert to list of TransactionModel
+        var transactions = transRes.docs
+            .map((e) => TransactionModel.fromJson(e.data()))
+            .toList();
+
+        // Apply date filters in memory
+
+        transactions = transactions
+            .where(
+              (t) =>
+                  t.date.isAfter(budget.startDate) ||
+                  t.date.isAtSameMomentAs(budget.startDate),
+            )
+            .toList();
+
+        final endOfDay = DateTime(
+          budget.endDate.year,
+          budget.endDate.month,
+          budget.endDate.day,
+          23,
+          59,
+          59,
+        );
+        transactions = transactions
+            .where(
+              (t) =>
+                  t.date.isBefore(endOfDay) ||
+                  t.date.isAtSameMomentAs(endOfDay),
+            )
+            .toList();
+
+        // Calculate total amount
+        final totalAmount = transactions.fold<int>(
+          0,
+          (sum, t) => sum + t.amount,
+        );
+
+        result.add(
+          BudgetResponseModel(
+            budget: budget,
+            transactions: transactions,
+            totalTransactions: totalAmount,
+          ),
+        );
+      }
+
+      return result;
     } catch (e, s) {
       YoLogger.error("$e -> $s");
       throw Exception(e);
@@ -167,6 +239,7 @@ class BottomNavBarNetworkDatasource implements BottomNavBarRepository {
     try {
       final res = await transactionCollection
           .where("uid", isEqualTo: auth.uid)
+          .orderBy("createdAt", descending: true)
           .get();
 
       return res.docs.map((e) => TransactionModel.fromJson(e.data())).toList();

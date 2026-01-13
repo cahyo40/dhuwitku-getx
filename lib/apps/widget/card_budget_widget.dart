@@ -1,16 +1,68 @@
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 class CardBudgetWidget extends StatelessWidget {
-  const CardBudgetWidget({super.key, this.onTap});
-
   final void Function()? onTap;
+
+  final BudgetResponseModel data;
+  const CardBudgetWidget({super.key, this.onTap, required this.data});
 
   @override
   Widget build(BuildContext context) {
-    final double progressWidth = context.width * 0.825;
+    final budget = data.budget;
+    final totalAmount = data.totalTransactions;
+    final countTransactions = data.transactions.length;
+    final color = Color(budget.color ?? primaryColor.toARGB32());
+
+    double decimalAmount() {
+      final data = (totalAmount / budget.amount);
+      return data;
+    }
+
+    String percentageAmount() {
+      final data = (totalAmount / budget.amount) * 100;
+      return "${data.toStringAsFixed(2)} %";
+    }
+
+    Color colorChip() {
+      if (decimalAmount() > 1) {
+        return errorColor;
+      } else if (decimalAmount() > 0.74 && decimalAmount() < 0.999) {
+        return warningColor;
+      } else if (decimalAmount() < 0.74) {
+        return successColor;
+      } else {
+        return gray500;
+      }
+    }
+
+    IconData iconChip() {
+      if (decimalAmount() > 1) {
+        return Icons.error;
+      } else if (decimalAmount() > 0.74 && decimalAmount() < 0.999) {
+        return Icons.warning;
+      } else if (decimalAmount() < 0.74) {
+        return Icons.check;
+      } else {
+        return Icons.info;
+      }
+    }
+
+    String message() {
+      if (decimalAmount() > 1) {
+        return "Over";
+      } else if (decimalAmount() > 0.74 && decimalAmount() < 0.999) {
+        return "Warning";
+      } else if (decimalAmount() < 0.74) {
+        return "Oke";
+      } else {
+        return "";
+      }
+    }
+
     return Padding(
       padding: YoPadding.bottom16,
       child: YoCard(
@@ -24,53 +76,74 @@ class CardBudgetWidget extends StatelessWidget {
                 spacing: YoSpacing.md,
                 children: [
                   YoAvatar.icon(
-                    icon: FontAwesome.burger_solid,
-                    iconColor: textColor,
+                    icon: IconData(
+                      budget.icon.codePoint,
+                      fontFamily: budget.icon.fontFamily,
+                      fontPackage: budget.icon.fontPackage,
+                    ),
+                    iconColor: color,
                     variant: YoAvatarVariant.rounded,
-                    backgroundColor: textColor.withOpacity(.25),
+                    backgroundColor: color.withOpacity(.25),
                   ),
                   Expanded(
                     child: YoColumn(
                       crossAxisAlignment: .start,
                       children: [
                         YoText.titleMedium(
-                          "Makan Siang",
+                          budget.name.capitalize!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.bold,
                         ),
-                        YoText.bodySmall("Pribadi", color: gray400),
+                        YoText.bodySmall(
+                          budget.isPrivate ? "Pribadi" : "Share",
+                          color: gray400,
+                        ),
                       ],
                     ),
                   ),
-                  YoChip(label: "74%", backgroundColor: backgroundColor),
+                  YoAvatar.icon(
+                    icon: iconChip(),
+                    iconColor: colorChip(),
+                    backgroundColor: colorChip().withOpacity(.25),
+                  ),
                 ],
               ),
-              Center(
-                child: SizedBox(
-                  height: 16,
-                  width: progressWidth,
-                  child: Stack(
+
+              YoRow(
+                spacing: YoAdaptive.spacingXs(context),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  YoRow(
                     children: [
-                      Container(
-                        height: 16,
-                        width: progressWidth,
-                        decoration: BoxDecoration(
-                          borderRadius: YoAdaptive.borderRadiusMd(context),
-                          color: primaryColor.withOpacity(.25),
+                      YoText.bodyMedium("Date Range ", color: gray400),
+                      YoText.monoMedium(
+                        YoDateFormatter.formatDateRange(
+                          budget.startDate,
+                          budget.endDate,
                         ),
-                      ),
-                      Container(
-                        height: 16,
-                        width: progressWidth * 0.75,
-                        decoration: BoxDecoration(
-                          borderRadius: YoAdaptive.borderRadiusMd(context),
-                          color: primaryColor,
-                        ),
+                        fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
-                ),
+                  YoRow(
+                    children: [
+                      YoText.bodyMedium("Transactions ", color: gray400),
+                      YoText.monoMedium(
+                        countTransactions.toString(),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              YoProgress.linear(
+                value: decimalAmount(),
+                backgroundColor: color.withOpacity(.25),
+                color: color,
+                size: YoProgressSize.large,
+                label: percentageAmount(),
               ),
 
               YoRow(
@@ -78,18 +151,22 @@ class CardBudgetWidget extends StatelessWidget {
                 children: [
                   YoRow(
                     children: [
-                      YoText.bodyMedium("Target ", color: gray400),
+                      YoText.bodyMedium("Pengeluaran ", color: gray400),
                       YoText.monoMedium(
-                        "Rp 100.000",
+                        YoCurrencyFormatter.formatCurrency(
+                          totalAmount.toDouble(),
+                        ),
                         fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
                   YoRow(
                     children: [
-                      YoText.bodyMedium("Sisa ", color: gray400),
+                      YoText.bodyMedium("Anggaran ", color: gray400),
                       YoText.monoMedium(
-                        "Rp 100.000",
+                        YoCurrencyFormatter.formatCurrency(
+                          budget.amount.toDouble(),
+                        ),
                         fontWeight: FontWeight.bold,
                       ),
                     ],

@@ -1,4 +1,4 @@
-import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/data/model/category_model.dart';
 import 'package:dhuwitku/apps/data/model/summary_model.dart';
 import 'package:dhuwitku/apps/data/model/transaction_model.dart';
@@ -12,7 +12,7 @@ class BottomNavBarRepositoryImpl implements BottomNavBarRepository {
   BottomNavBarRepositoryImpl(this._datasource);
 
   @override
-  Future<List<BudgetModel>> getBudgets() async {
+  Future<List<BudgetResponseModel>> getBudgets() async {
     return await _datasource.getBudgets();
   }
 

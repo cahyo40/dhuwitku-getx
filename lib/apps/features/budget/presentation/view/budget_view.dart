@@ -1,4 +1,7 @@
+import 'package:dhuwitku/apps/core/utils/l10n.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/presentation/controller/bottom_nav_bar_controller.dart';
+import 'package:dhuwitku/apps/features/budget/presentation/view/screen/budget_filter_screen.dart';
+import 'package:dhuwitku/apps/features/budget/presentation/view/screen/budget_list_screen.dart';
 import 'package:dhuwitku/apps/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +15,18 @@ class BudgetView extends GetView<BudgetController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Budget'.tr), centerTitle: true),
+      appBar: AppBar(
+        title: Text('Budget'.tr),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.retry(useLoading: true);
+            },
+            icon: Icon(Icons.refresh),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         key: Key("${auth.uid}_BudgetCreate"),
         onPressed: () async {
@@ -29,31 +43,26 @@ class BudgetView extends GetView<BudgetController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: YoLoading());
         }
 
         if (controller.error.value != null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(controller.error.value!),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: controller.retry,
-                  child: const Text('Retry'),
-                ),
-              ],
-            ),
+          return YoEmptyState.error(
+            actionText: L10n.t.retry,
+            onAction: controller.retry,
+            title: L10n.t.error_title,
+            description: controller.error.value!,
           );
         }
 
-        return const SafeArea(
-          child: Center(
-            child: Text(
-              'BudgetView is working',
-              style: TextStyle(fontSize: 20),
-            ),
+        return SafeArea(
+          child: YoColumn(
+            padding: YoPadding.all16,
+            spacing: YoAdaptive.spacingSm(context),
+            children: [
+              BudgetFilterScreen(),
+              Expanded(child: BudgetListScreen()),
+            ],
           ),
         );
       }),

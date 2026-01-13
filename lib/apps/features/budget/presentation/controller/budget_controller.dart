@@ -1,6 +1,7 @@
-import 'package:dhuwitku/apps/data/model/budget_model.dart';
+import 'package:dhuwitku/apps/data/model/budget_response_model.dart';
 import 'package:dhuwitku/apps/features/bottom_nav_bar/domain/usecase/get_budgets_usecase.dart';
 import 'package:get/get.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 class BudgetController extends GetxController {
   // State
@@ -8,8 +9,9 @@ class BudgetController extends GetxController {
   final RxnString error = RxnString();
 
   // data
-  final RxList<BudgetModel> budgets = RxList<BudgetModel>();
-  final RxList<BudgetModel> budgetsFiltered = RxList<BudgetModel>();
+  final RxList<BudgetResponseModel> budgets = RxList<BudgetResponseModel>();
+  final RxList<BudgetResponseModel> budgetsFiltered =
+      RxList<BudgetResponseModel>();
 
   // use case
   final getBudgetsUsecase = GetBudgetsUsecase(Get.find());
@@ -25,10 +27,10 @@ class BudgetController extends GetxController {
   }
 
   Future<void> _loadData({bool useLoading = true}) async {
+    YoLogger.info("_loadData Budget Controller");
     try {
       isLoading.value = useLoading;
       error.value = null;
-
       final res = await Future.wait([getBudgetsUsecase.call()]);
       budgets.value = res[0];
       budgetsFiltered.value = budgets;
